@@ -18,11 +18,69 @@ namespace ModbusRTUSlave
         public Form1()
         {
             InitializeComponent();
+            InitialListView();
         }
+        #region listview
+        private void InitialListView()//初始化ListView的格式大小 
+        {
+            listView1.View = View.Details;
+            listView1.GridLines = true;
+            listView1.LabelEdit = false;
+            listView1.FullRowSelect = true;
+            listView1.Columns.Add("address",50);
+            listView1.Columns.Add("value", 50);
+            //雙緩衝
+            listView1.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance
+   | System.Reflection.BindingFlags.NonPublic).SetValue(listView1, true, null);
+        }
+        public delegate void Listview_Print(ListView list, string time, string message);//time type 沒改
+        public static void lv_Print(ListView list, string time, string message)// 輸入listview ,兩個str
+        {
+            //判斷這個TextBox的物件是否在同一個執行緒上
+            if (list.InvokeRequired)
+            {
+                Listview_Print ph = new Listview_Print(lv_Print);
+                list.Invoke(ph, list, time, message);
+            }
+            else
+            {
+                String[] row = { time, message };
+                ListViewItem item = new ListViewItem(row);
+                //ADD ITEMS
+                list.Items.Add(item);
+                if (list.Items.Count > 1000)
+                {
+                    list.Items.RemoveAt(1);
+                }
+            }
+        }
+        public static void lv_Print(ListView list, string message)// 輸入listview ,兩個str
+        {
+            String time = DateTime.Now.ToString();
+            //判斷這個TextBox的物件是否在同一個執行緒上
+            if (list.InvokeRequired)
+            {
+                Listview_Print ph = new Listview_Print(lv_Print);
+                list.Invoke(ph, list, time, message);
+            }
+            else
+            {
+                String[] row = { time, message };
+                ListViewItem item = new ListViewItem(row);
+                //ADD ITEMS
+                list.Items.Add(item);
+                if (list.Items.Count > 1000)
+                {
+                    list.Items.RemoveAt(1);
+                }
+            }
+        }
+#endregion
+
         ModbusSlave slave;
         private byte slaveID = 1;
         private SerialPort comPort = new SerialPort();
-
+        ushort[] reg30 = new ushort[60];
         private void Form1_Load(object sender, EventArgs e)
         {
             cmbBaud.SelectedIndex = 7;
@@ -154,7 +212,39 @@ namespace ModbusRTUSlave
         }
         #endregion
 
-        private void btOpenCOM_Click(object sender, EventArgs e)
+
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            //update input values to datastore
+            //DI
+            slave.DataStore.InputDiscretes[1] = chkDI1.Checked;
+            slave.DataStore.InputDiscretes[2] = chkDI2.Checked;
+            slave.DataStore.InputDiscretes[3] = chkDI3.Checked;
+            slave.DataStore.InputDiscretes[4] = chkDI4.Checked;
+            //AI
+            slave.DataStore.InputRegisters[1] = Convert.ToUInt16(txtAI1.Text);
+            slave.DataStore.InputRegisters[2] = Convert.ToUInt16(txtAI2.Text);
+            slave.DataStore.InputRegisters[3] = Convert.ToUInt16(txtAI3.Text);
+            slave.DataStore.InputRegisters[4] = Convert.ToUInt16(txtAI4.Text);
+            //AO
+            slave.DataStore.HoldingRegisters[1] = Convert.ToUInt16(txtAO1.Text);
+            slave.DataStore.HoldingRegisters[2] = Convert.ToUInt16(txtAO2.Text);
+            slave.DataStore.HoldingRegisters[3] = Convert.ToUInt16(txtAO3.Text);
+            slave.DataStore.HoldingRegisters[4] = Convert.ToUInt16(txtAO4.Text);
+            //DO
+            slave.DataStore.CoilDiscretes[1] = chkDO1.Checked;
+            slave.DataStore.CoilDiscretes[2] = chkDO2.Checked;
+            slave.DataStore.CoilDiscretes[3] = chkDO3.Checked;
+            slave.DataStore.CoilDiscretes[4] = chkDO4.Checked;
+        }
+
+        private void cmbPort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btOpenCOM_Click_1(object sender, EventArgs e)
         {
             comPort.PortName = cmbPort.Text;
             comPort.BaudRate = int.Parse(cmbBaud.Text);
@@ -188,47 +278,42 @@ namespace ModbusRTUSlave
             btCloseCOM.Enabled = true;
             slave.Listen();
             timer1.Enabled = true;
+            timer2.Enabled = true;
+            for (int i = 0; i < 60; i++)
+            {
+                reg30[i] = (ushort)i;
+            }
         }
 
-        private void btCloseCOM_Click(object sender, EventArgs e)
+        private void btCloseCOM_Click_1(object sender, EventArgs e)
         {
             //Close comport first,then stop and dispose slave.
-            comPort.Close();    
+            comPort.Close();
             slave.Stop();
             slave.Dispose();
             btOpenCOM.Enabled = true;
             btCloseCOM.Enabled = false;
             timer1.Enabled = false;
         }
-
-        private void timer1_Tick(object sender, EventArgs e)
+        private void btOpenCOM_Click(object sender, EventArgs e)
         {
-            //update input values to datastore
-            //DI
-            slave.DataStore.InputDiscretes[1] = chkDI1.Checked;
-            slave.DataStore.InputDiscretes[2] = chkDI2.Checked;
-            slave.DataStore.InputDiscretes[3] = chkDI3.Checked;
-            slave.DataStore.InputDiscretes[4] = chkDI4.Checked;
-            //AI
-            slave.DataStore.InputRegisters[1] = Convert.ToUInt16(txtAI1.Text);
-            slave.DataStore.InputRegisters[2] = Convert.ToUInt16(txtAI2.Text);
-            slave.DataStore.InputRegisters[3] = Convert.ToUInt16(txtAI3.Text);
-            slave.DataStore.InputRegisters[4] = Convert.ToUInt16(txtAI4.Text);
-            //AO
-            slave.DataStore.HoldingRegisters[1] = Convert.ToUInt16(txtAO1.Text);
-            slave.DataStore.HoldingRegisters[2] = Convert.ToUInt16(txtAO2.Text);
-            slave.DataStore.HoldingRegisters[3] = Convert.ToUInt16(txtAO3.Text);
-            slave.DataStore.HoldingRegisters[4] = Convert.ToUInt16(txtAO4.Text);
-            //DO
-            slave.DataStore.CoilDiscretes[1] = chkDO1.Checked;
-            slave.DataStore.CoilDiscretes[2] = chkDO2.Checked;
-            slave.DataStore.CoilDiscretes[3] = chkDO3.Checked;
-            slave.DataStore.CoilDiscretes[4] = chkDO4.Checked;
+
         }
 
-        private void cmbPort_SelectedIndexChanged(object sender, EventArgs e)
+        private void btCloseCOM_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            listView1.Items.Clear();
+            for (int i = 0; i < 60; i++)
+            {
+                slave.DataStore.InputRegisters[5000 + i] = reg30[i];
+                int addr = 3500 + i;
+                lv_Print(listView1, addr.ToString(), reg30[i].ToString());
+            }
         }
     }
 }

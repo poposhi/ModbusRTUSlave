@@ -29,6 +29,10 @@ namespace ModbusRTUSlave
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.pnlCOMStatus = new System.Windows.Forms.Panel();
             this.cmbStopBit = new System.Windows.Forms.ComboBox();
             this.btCloseCOM = new System.Windows.Forms.Button();
@@ -64,9 +68,70 @@ namespace ModbusRTUSlave
             this.chkDO2 = new System.Windows.Forms.CheckBox();
             this.chkDO1 = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.pnlCOMStatus.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(12, 12);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(645, 522);
+            this.tabControl1.TabIndex = 56;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.pnlCOMStatus);
+            this.tabPage1.Controls.Add(this.txtAI4);
+            this.tabPage1.Controls.Add(this.txtAI3);
+            this.tabPage1.Controls.Add(this.txtAI2);
+            this.tabPage1.Controls.Add(this.txtAI1);
+            this.tabPage1.Controls.Add(this.label5);
+            this.tabPage1.Controls.Add(this.txtAO4);
+            this.tabPage1.Controls.Add(this.txtAO3);
+            this.tabPage1.Controls.Add(this.txtAO2);
+            this.tabPage1.Controls.Add(this.txtAO1);
+            this.tabPage1.Controls.Add(this.label3);
+            this.tabPage1.Controls.Add(this.label4);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(637, 493);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.listView1);
+            this.tabPage2.Controls.Add(this.chkDI4);
+            this.tabPage2.Controls.Add(this.chkDI3);
+            this.tabPage2.Controls.Add(this.chkDI2);
+            this.tabPage2.Controls.Add(this.chkDI1);
+            this.tabPage2.Controls.Add(this.label2);
+            this.tabPage2.Controls.Add(this.chkDO4);
+            this.tabPage2.Controls.Add(this.chkDO3);
+            this.tabPage2.Controls.Add(this.chkDO2);
+            this.tabPage2.Controls.Add(this.chkDO1);
+            this.tabPage2.Controls.Add(this.label1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(637, 493);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // pnlCOMStatus
             // 
@@ -83,10 +148,11 @@ namespace ModbusRTUSlave
             this.pnlCOMStatus.Controls.Add(this.labPort);
             this.pnlCOMStatus.Controls.Add(this.cmbBaud);
             this.pnlCOMStatus.Controls.Add(this.cmbPort);
-            this.pnlCOMStatus.Location = new System.Drawing.Point(-1, 35);
+            this.pnlCOMStatus.Location = new System.Drawing.Point(27, 78);
+            this.pnlCOMStatus.Margin = new System.Windows.Forms.Padding(4);
             this.pnlCOMStatus.Name = "pnlCOMStatus";
-            this.pnlCOMStatus.Size = new System.Drawing.Size(406, 87);
-            this.pnlCOMStatus.TabIndex = 34;
+            this.pnlCOMStatus.Size = new System.Drawing.Size(541, 109);
+            this.pnlCOMStatus.TabIndex = 56;
             // 
             // cmbStopBit
             // 
@@ -94,21 +160,23 @@ namespace ModbusRTUSlave
             this.cmbStopBit.Items.AddRange(new object[] {
             "1",
             "2"});
-            this.cmbStopBit.Location = new System.Drawing.Point(339, 35);
+            this.cmbStopBit.Location = new System.Drawing.Point(452, 44);
+            this.cmbStopBit.Margin = new System.Windows.Forms.Padding(4);
             this.cmbStopBit.Name = "cmbStopBit";
-            this.cmbStopBit.Size = new System.Drawing.Size(56, 22);
+            this.cmbStopBit.Size = new System.Drawing.Size(73, 24);
             this.cmbStopBit.TabIndex = 32;
             // 
             // btCloseCOM
             // 
             this.btCloseCOM.Enabled = false;
             this.btCloseCOM.Font = new System.Drawing.Font("Arial", 8F);
-            this.btCloseCOM.Location = new System.Drawing.Point(317, 61);
+            this.btCloseCOM.Location = new System.Drawing.Point(423, 76);
+            this.btCloseCOM.Margin = new System.Windows.Forms.Padding(4);
             this.btCloseCOM.Name = "btCloseCOM";
-            this.btCloseCOM.Size = new System.Drawing.Size(78, 23);
+            this.btCloseCOM.Size = new System.Drawing.Size(104, 29);
             this.btCloseCOM.TabIndex = 45;
             this.btCloseCOM.Text = "Close";
-            this.btCloseCOM.Click += new System.EventHandler(this.btCloseCOM_Click);
+            this.btCloseCOM.Click += new System.EventHandler(this.btCloseCOM_Click_1);
             // 
             // cmbParity
             // 
@@ -117,20 +185,22 @@ namespace ModbusRTUSlave
             "0-None Parity",
             "1-Odd Parity",
             "2-Even Parity"});
-            this.cmbParity.Location = new System.Drawing.Point(226, 35);
+            this.cmbParity.Location = new System.Drawing.Point(301, 44);
+            this.cmbParity.Margin = new System.Windows.Forms.Padding(4);
             this.cmbParity.Name = "cmbParity";
-            this.cmbParity.Size = new System.Drawing.Size(100, 22);
+            this.cmbParity.Size = new System.Drawing.Size(132, 24);
             this.cmbParity.TabIndex = 31;
             // 
             // btOpenCOM
             // 
             this.btOpenCOM.Font = new System.Drawing.Font("Arial", 8F);
-            this.btOpenCOM.Location = new System.Drawing.Point(226, 61);
+            this.btOpenCOM.Location = new System.Drawing.Point(301, 76);
+            this.btOpenCOM.Margin = new System.Windows.Forms.Padding(4);
             this.btOpenCOM.Name = "btOpenCOM";
-            this.btOpenCOM.Size = new System.Drawing.Size(78, 23);
+            this.btOpenCOM.Size = new System.Drawing.Size(104, 29);
             this.btOpenCOM.TabIndex = 38;
             this.btOpenCOM.Text = "Open";
-            this.btOpenCOM.Click += new System.EventHandler(this.btOpenCOM_Click);
+            this.btOpenCOM.Click += new System.EventHandler(this.btOpenCOM_Click_1);
             // 
             // cmbDataBit
             // 
@@ -138,27 +208,30 @@ namespace ModbusRTUSlave
             this.cmbDataBit.Items.AddRange(new object[] {
             "7",
             "8"});
-            this.cmbDataBit.Location = new System.Drawing.Point(170, 35);
+            this.cmbDataBit.Location = new System.Drawing.Point(227, 44);
+            this.cmbDataBit.Margin = new System.Windows.Forms.Padding(4);
             this.cmbDataBit.Name = "cmbDataBit";
-            this.cmbDataBit.Size = new System.Drawing.Size(48, 22);
+            this.cmbDataBit.Size = new System.Drawing.Size(63, 24);
             this.cmbDataBit.TabIndex = 30;
             // 
             // label7
             // 
             this.label7.Font = new System.Drawing.Font("Arial", 8F);
             this.label7.ForeColor = System.Drawing.Color.Blue;
-            this.label7.Location = new System.Drawing.Point(3, 3);
+            this.label7.Location = new System.Drawing.Point(4, 4);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(140, 17);
+            this.label7.Size = new System.Drawing.Size(187, 21);
             this.label7.TabIndex = 46;
             this.label7.Text = "Connection Status";
             // 
             // labStopBit
             // 
             this.labStopBit.Font = new System.Drawing.Font("Arial", 8F);
-            this.labStopBit.Location = new System.Drawing.Point(339, 20);
+            this.labStopBit.Location = new System.Drawing.Point(452, 25);
+            this.labStopBit.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labStopBit.Name = "labStopBit";
-            this.labStopBit.Size = new System.Drawing.Size(56, 15);
+            this.labStopBit.Size = new System.Drawing.Size(75, 19);
             this.labStopBit.TabIndex = 47;
             this.labStopBit.Text = "Stop Bit";
             this.labStopBit.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -166,9 +239,10 @@ namespace ModbusRTUSlave
             // labParity
             // 
             this.labParity.Font = new System.Drawing.Font("Arial", 8F);
-            this.labParity.Location = new System.Drawing.Point(228, 20);
+            this.labParity.Location = new System.Drawing.Point(304, 25);
+            this.labParity.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labParity.Name = "labParity";
-            this.labParity.Size = new System.Drawing.Size(98, 15);
+            this.labParity.Size = new System.Drawing.Size(131, 19);
             this.labParity.TabIndex = 48;
             this.labParity.Text = "Parity";
             this.labParity.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -176,9 +250,10 @@ namespace ModbusRTUSlave
             // labBaud
             // 
             this.labBaud.Font = new System.Drawing.Font("Arial", 8F);
-            this.labBaud.Location = new System.Drawing.Point(86, 20);
+            this.labBaud.Location = new System.Drawing.Point(115, 25);
+            this.labBaud.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labBaud.Name = "labBaud";
-            this.labBaud.Size = new System.Drawing.Size(75, 15);
+            this.labBaud.Size = new System.Drawing.Size(100, 19);
             this.labBaud.TabIndex = 49;
             this.labBaud.Text = "Baudrate";
             this.labBaud.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -186,9 +261,10 @@ namespace ModbusRTUSlave
             // labDataBit
             // 
             this.labDataBit.Font = new System.Drawing.Font("Arial", 8F);
-            this.labDataBit.Location = new System.Drawing.Point(170, 20);
+            this.labDataBit.Location = new System.Drawing.Point(227, 25);
+            this.labDataBit.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labDataBit.Name = "labDataBit";
-            this.labDataBit.Size = new System.Drawing.Size(48, 15);
+            this.labDataBit.Size = new System.Drawing.Size(64, 19);
             this.labDataBit.TabIndex = 50;
             this.labDataBit.Text = "Data Bit";
             this.labDataBit.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -196,9 +272,10 @@ namespace ModbusRTUSlave
             // labPort
             // 
             this.labPort.Font = new System.Drawing.Font("Arial", 8F);
-            this.labPort.Location = new System.Drawing.Point(6, 20);
+            this.labPort.Location = new System.Drawing.Point(8, 25);
+            this.labPort.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labPort.Name = "labPort";
-            this.labPort.Size = new System.Drawing.Size(75, 15);
+            this.labPort.Size = new System.Drawing.Size(100, 19);
             this.labPort.TabIndex = 51;
             this.labPort.Text = "COM Port";
             this.labPort.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -215,232 +292,248 @@ namespace ModbusRTUSlave
             "38400",
             "57600",
             "9600"});
-            this.cmbBaud.Location = new System.Drawing.Point(85, 35);
+            this.cmbBaud.Location = new System.Drawing.Point(113, 44);
+            this.cmbBaud.Margin = new System.Windows.Forms.Padding(4);
             this.cmbBaud.Name = "cmbBaud";
-            this.cmbBaud.Size = new System.Drawing.Size(76, 22);
+            this.cmbBaud.Size = new System.Drawing.Size(100, 24);
             this.cmbBaud.TabIndex = 29;
             // 
             // cmbPort
             // 
             this.cmbPort.Font = new System.Drawing.Font("Arial", 8F);
-            this.cmbPort.Location = new System.Drawing.Point(6, 35);
+            this.cmbPort.Location = new System.Drawing.Point(8, 44);
+            this.cmbPort.Margin = new System.Windows.Forms.Padding(4);
             this.cmbPort.Name = "cmbPort";
-            this.cmbPort.Size = new System.Drawing.Size(75, 22);
+            this.cmbPort.Size = new System.Drawing.Size(99, 24);
             this.cmbPort.TabIndex = 28;
             this.cmbPort.Text = "COM4";
-            this.cmbPort.SelectedIndexChanged += new System.EventHandler(this.cmbPort_SelectedIndexChanged);
             // 
             // txtAI4
             // 
-            this.txtAI4.Location = new System.Drawing.Point(190, 289);
+            this.txtAI4.Location = new System.Drawing.Point(281, 395);
+            this.txtAI4.Margin = new System.Windows.Forms.Padding(4);
             this.txtAI4.Name = "txtAI4";
-            this.txtAI4.Size = new System.Drawing.Size(98, 22);
-            this.txtAI4.TabIndex = 50;
+            this.txtAI4.Size = new System.Drawing.Size(129, 25);
+            this.txtAI4.TabIndex = 72;
             this.txtAI4.Text = "444";
             // 
             // txtAI3
             // 
-            this.txtAI3.Location = new System.Drawing.Point(190, 248);
+            this.txtAI3.Location = new System.Drawing.Point(281, 344);
+            this.txtAI3.Margin = new System.Windows.Forms.Padding(4);
             this.txtAI3.Name = "txtAI3";
-            this.txtAI3.Size = new System.Drawing.Size(98, 22);
-            this.txtAI3.TabIndex = 49;
+            this.txtAI3.Size = new System.Drawing.Size(129, 25);
+            this.txtAI3.TabIndex = 71;
             this.txtAI3.Text = "333";
             // 
             // txtAI2
             // 
-            this.txtAI2.Location = new System.Drawing.Point(190, 207);
+            this.txtAI2.Location = new System.Drawing.Point(281, 293);
+            this.txtAI2.Margin = new System.Windows.Forms.Padding(4);
             this.txtAI2.Name = "txtAI2";
-            this.txtAI2.Size = new System.Drawing.Size(98, 22);
-            this.txtAI2.TabIndex = 48;
+            this.txtAI2.Size = new System.Drawing.Size(129, 25);
+            this.txtAI2.TabIndex = 70;
             this.txtAI2.Text = "222";
             // 
             // txtAI1
             // 
-            this.txtAI1.Location = new System.Drawing.Point(190, 167);
+            this.txtAI1.Location = new System.Drawing.Point(281, 243);
+            this.txtAI1.Margin = new System.Windows.Forms.Padding(4);
             this.txtAI1.Name = "txtAI1";
-            this.txtAI1.Size = new System.Drawing.Size(98, 22);
-            this.txtAI1.TabIndex = 47;
+            this.txtAI1.Size = new System.Drawing.Size(129, 25);
+            this.txtAI1.TabIndex = 69;
             this.txtAI1.Text = "111";
             // 
             // label5
             // 
             this.label5.Font = new System.Drawing.Font("Tahoma", 24F);
-            this.label5.Location = new System.Drawing.Point(43, -2);
+            this.label5.Location = new System.Drawing.Point(39, 35);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(394, 34);
-            this.label5.TabIndex = 51;
+            this.label5.Size = new System.Drawing.Size(525, 47);
+            this.label5.TabIndex = 73;
             this.label5.Text = "IO Simulation";
             // 
             // txtAO4
             // 
-            this.txtAO4.Location = new System.Drawing.Point(307, 289);
+            this.txtAO4.Location = new System.Drawing.Point(437, 395);
+            this.txtAO4.Margin = new System.Windows.Forms.Padding(4);
             this.txtAO4.Name = "txtAO4";
-            this.txtAO4.Size = new System.Drawing.Size(98, 22);
-            this.txtAO4.TabIndex = 46;
+            this.txtAO4.Size = new System.Drawing.Size(129, 25);
+            this.txtAO4.TabIndex = 68;
             this.txtAO4.Text = "0";
             // 
             // txtAO3
             // 
-            this.txtAO3.Location = new System.Drawing.Point(307, 248);
+            this.txtAO3.Location = new System.Drawing.Point(437, 344);
+            this.txtAO3.Margin = new System.Windows.Forms.Padding(4);
             this.txtAO3.Name = "txtAO3";
-            this.txtAO3.Size = new System.Drawing.Size(98, 22);
-            this.txtAO3.TabIndex = 45;
+            this.txtAO3.Size = new System.Drawing.Size(129, 25);
+            this.txtAO3.TabIndex = 67;
             this.txtAO3.Text = "0";
             // 
             // txtAO2
             // 
-            this.txtAO2.Location = new System.Drawing.Point(307, 207);
+            this.txtAO2.Location = new System.Drawing.Point(437, 293);
+            this.txtAO2.Margin = new System.Windows.Forms.Padding(4);
             this.txtAO2.Name = "txtAO2";
-            this.txtAO2.Size = new System.Drawing.Size(98, 22);
-            this.txtAO2.TabIndex = 44;
+            this.txtAO2.Size = new System.Drawing.Size(129, 25);
+            this.txtAO2.TabIndex = 66;
             this.txtAO2.Text = "0";
             // 
             // txtAO1
             // 
-            this.txtAO1.Location = new System.Drawing.Point(307, 167);
+            this.txtAO1.Location = new System.Drawing.Point(437, 243);
+            this.txtAO1.Margin = new System.Windows.Forms.Padding(4);
             this.txtAO1.Name = "txtAO1";
-            this.txtAO1.Size = new System.Drawing.Size(98, 22);
-            this.txtAO1.TabIndex = 43;
+            this.txtAO1.Size = new System.Drawing.Size(129, 25);
+            this.txtAO1.TabIndex = 65;
             this.txtAO1.Text = "0";
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(305, 142);
+            this.label3.Location = new System.Drawing.Point(435, 212);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(122, 21);
-            this.label3.TabIndex = 52;
+            this.label3.Size = new System.Drawing.Size(163, 26);
+            this.label3.TabIndex = 74;
             this.label3.Text = "AO Value";
             // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(190, 142);
+            this.label4.Location = new System.Drawing.Point(24, 191);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(109, 21);
-            this.label4.TabIndex = 53;
+            this.label4.Size = new System.Drawing.Size(145, 26);
+            this.label4.TabIndex = 75;
             this.label4.Text = "AI Value";
             // 
             // chkDI4
             // 
-            this.chkDI4.Location = new System.Drawing.Point(102, 289);
+            this.chkDI4.Location = new System.Drawing.Point(141, 392);
+            this.chkDI4.Margin = new System.Windows.Forms.Padding(4);
             this.chkDI4.Name = "chkDI4";
-            this.chkDI4.Size = new System.Drawing.Size(82, 23);
-            this.chkDI4.TabIndex = 42;
+            this.chkDI4.Size = new System.Drawing.Size(109, 20);
+            this.chkDI4.TabIndex = 85;
             this.chkDI4.Text = "100004";
             // 
             // chkDI3
             // 
-            this.chkDI3.Location = new System.Drawing.Point(102, 248);
+            this.chkDI3.Location = new System.Drawing.Point(141, 341);
+            this.chkDI3.Margin = new System.Windows.Forms.Padding(4);
             this.chkDI3.Name = "chkDI3";
-            this.chkDI3.Size = new System.Drawing.Size(82, 23);
-            this.chkDI3.TabIndex = 41;
+            this.chkDI3.Size = new System.Drawing.Size(109, 20);
+            this.chkDI3.TabIndex = 84;
             this.chkDI3.Text = "100003";
             // 
             // chkDI2
             // 
-            this.chkDI2.Location = new System.Drawing.Point(102, 207);
+            this.chkDI2.Location = new System.Drawing.Point(141, 290);
+            this.chkDI2.Margin = new System.Windows.Forms.Padding(4);
             this.chkDI2.Name = "chkDI2";
-            this.chkDI2.Size = new System.Drawing.Size(82, 23);
-            this.chkDI2.TabIndex = 40;
+            this.chkDI2.Size = new System.Drawing.Size(109, 20);
+            this.chkDI2.TabIndex = 83;
             this.chkDI2.Text = "100002";
             // 
             // chkDI1
             // 
-            this.chkDI1.Location = new System.Drawing.Point(100, 166);
+            this.chkDI1.Location = new System.Drawing.Point(138, 239);
+            this.chkDI1.Margin = new System.Windows.Forms.Padding(4);
             this.chkDI1.Name = "chkDI1";
-            this.chkDI1.Size = new System.Drawing.Size(82, 23);
-            this.chkDI1.TabIndex = 39;
+            this.chkDI1.Size = new System.Drawing.Size(109, 20);
+            this.chkDI1.TabIndex = 82;
             this.chkDI1.Text = "100001";
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(102, 142);
+            this.label2.Location = new System.Drawing.Point(141, 209);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(82, 21);
-            this.label2.TabIndex = 54;
+            this.label2.Size = new System.Drawing.Size(109, 17);
+            this.label2.TabIndex = 86;
             this.label2.Text = "DI Value";
             // 
             // chkDO4
             // 
-            this.chkDO4.Location = new System.Drawing.Point(14, 289);
+            this.chkDO4.Location = new System.Drawing.Point(24, 392);
+            this.chkDO4.Margin = new System.Windows.Forms.Padding(4);
             this.chkDO4.Name = "chkDO4";
-            this.chkDO4.Size = new System.Drawing.Size(82, 23);
-            this.chkDO4.TabIndex = 38;
+            this.chkDO4.Size = new System.Drawing.Size(109, 20);
+            this.chkDO4.TabIndex = 81;
             this.chkDO4.Text = "000004";
             // 
             // chkDO3
             // 
-            this.chkDO3.Location = new System.Drawing.Point(14, 248);
+            this.chkDO3.Location = new System.Drawing.Point(24, 341);
+            this.chkDO3.Margin = new System.Windows.Forms.Padding(4);
             this.chkDO3.Name = "chkDO3";
-            this.chkDO3.Size = new System.Drawing.Size(82, 23);
-            this.chkDO3.TabIndex = 37;
+            this.chkDO3.Size = new System.Drawing.Size(109, 20);
+            this.chkDO3.TabIndex = 80;
             this.chkDO3.Text = "000003";
             // 
             // chkDO2
             // 
-            this.chkDO2.Location = new System.Drawing.Point(14, 207);
+            this.chkDO2.Location = new System.Drawing.Point(24, 290);
+            this.chkDO2.Margin = new System.Windows.Forms.Padding(4);
             this.chkDO2.Name = "chkDO2";
-            this.chkDO2.Size = new System.Drawing.Size(82, 23);
-            this.chkDO2.TabIndex = 36;
+            this.chkDO2.Size = new System.Drawing.Size(109, 20);
+            this.chkDO2.TabIndex = 79;
             this.chkDO2.Text = "000002";
             // 
             // chkDO1
             // 
-            this.chkDO1.Location = new System.Drawing.Point(12, 166);
+            this.chkDO1.Location = new System.Drawing.Point(21, 239);
+            this.chkDO1.Margin = new System.Windows.Forms.Padding(4);
             this.chkDO1.Name = "chkDO1";
-            this.chkDO1.Size = new System.Drawing.Size(82, 23);
-            this.chkDO1.TabIndex = 35;
+            this.chkDO1.Size = new System.Drawing.Size(109, 20);
+            this.chkDO1.TabIndex = 78;
             this.chkDO1.Text = "000001";
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(14, 142);
+            this.label1.Location = new System.Drawing.Point(24, 209);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 21);
-            this.label1.TabIndex = 55;
+            this.label1.Size = new System.Drawing.Size(109, 17);
+            this.label1.TabIndex = 87;
             this.label1.Text = "DO Value";
             // 
-            // timer1
+            // listView1
             // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(349, 6);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(268, 481);
+            this.listView1.TabIndex = 88;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
+            // timer2
+            // 
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(436, 341);
-            this.Controls.Add(this.pnlCOMStatus);
-            this.Controls.Add(this.txtAI4);
-            this.Controls.Add(this.txtAI3);
-            this.Controls.Add(this.txtAI2);
-            this.Controls.Add(this.txtAI1);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.txtAO4);
-            this.Controls.Add(this.txtAO3);
-            this.Controls.Add(this.txtAO2);
-            this.Controls.Add(this.txtAO1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.chkDI4);
-            this.Controls.Add(this.chkDI3);
-            this.Controls.Add(this.chkDI2);
-            this.Controls.Add(this.chkDI1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.chkDO4);
-            this.Controls.Add(this.chkDO3);
-            this.Controls.Add(this.chkDO2);
-            this.Controls.Add(this.chkDO1);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(662, 612);
+            this.Controls.Add(this.tabControl1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "Modbus_Slave_RTU_Demo";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
             this.pnlCOMStatus.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Panel pnlCOMStatus;
         private System.Windows.Forms.ComboBox cmbStopBit;
         private System.Windows.Forms.Button btCloseCOM;
@@ -466,6 +559,7 @@ namespace ModbusRTUSlave
         private System.Windows.Forms.TextBox txtAO1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.CheckBox chkDI4;
         private System.Windows.Forms.CheckBox chkDI3;
         private System.Windows.Forms.CheckBox chkDI2;
@@ -476,7 +570,8 @@ namespace ModbusRTUSlave
         private System.Windows.Forms.CheckBox chkDO2;
         private System.Windows.Forms.CheckBox chkDO1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Timer timer2;
     }
 }
 
