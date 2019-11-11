@@ -310,10 +310,12 @@ namespace ModbusRTUSlave
         }
         private void reg_init()
         {
-            reg30[6] = reg30[7] = reg30[8] = 380;
+            reg30[2] = 0; //初始化故障代碼
+            reg30[6] = reg30[7] = reg30[8] = 380; //初始化電壓 
             reg30[16] = 60;
             reg30[24] = 0;
             reg30[25] = 0;
+
         }
         private void btCloseCOM_Click_1(object sender, EventArgs e)
         {
@@ -413,6 +415,20 @@ namespace ModbusRTUSlave
                 tb1.Text += "bt_fine_f- error";
             }
         }
+        private void ref_writeBit(ref ushort value, int bit_number, char bit_value) //輸入數值 要更改的第幾個bit  要更改的數值 回傳整個暫存器 更改好的數值  
+        {
+            try 
+            {
+                string flag;
+                int Substring_bit = 15 - bit_number;
+                flag = Convert.ToString(value, 2).PadLeft(16, '0');
+                var c = flag.ToCharArray();//分開成 char array
+                c[Substring_bit] = bit_value; //修改
+                string str = new string(c); //合併 char array to string 
+                value = Convert.ToUInt16(str, 2);
+            }
+            catch { tb1.Text += "ref_writeBit error"; }
+        }
 
         private void txtAO4_TextChanged(object sender, EventArgs e)
         {
@@ -433,5 +449,165 @@ namespace ModbusRTUSlave
         {
 
         }
+        #region checkBox
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                switch (checkBox1.CheckState)
+                {
+                    case CheckState.Checked:
+                        ref_writeBit(ref reg30[2], 0, '1');
+                        break;
+                    case CheckState.Unchecked:
+                        ref_writeBit(ref reg30[2], 0, '0');
+                        break;
+                    case CheckState.Indeterminate:
+                        tb1.Text += "進入CheckBox的三種狀態";
+                        break;
+                }
+            }
+            catch(Exception ee) { tb1.Text += "CheckBox error"+ee.Message; }
+        }
+        private void checkBox2_CheckedChanged_1(object sender, EventArgs e)
+        {
+            try
+            {
+                switch (checkBox2.CheckState)
+                {
+                    case CheckState.Checked:
+                        ref_writeBit(ref reg30[2], 1, '1');
+                        break;
+                    case CheckState.Unchecked:
+                        ref_writeBit(ref reg30[2], 1, '0');
+                        break;
+                    case CheckState.Indeterminate:
+                        tb1.Text += "進入CheckBox的三種狀態";
+                        break;
+                }
+            }
+            catch (Exception ee) { tb1.Text += "CheckBox error" + ee.Message; }
+        }
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                switch (checkBox3.CheckState)
+                {
+                    case CheckState.Checked:
+                        ref_writeBit(ref reg30[2], 2, '1');
+                        break;
+                    case CheckState.Unchecked:
+                        ref_writeBit(ref reg30[2], 2, '0');
+                        break;
+                    case CheckState.Indeterminate:
+                        tb1.Text += "進入CheckBox的三種狀態";
+                        break;
+                }
+            }
+            catch (Exception ee) { tb1.Text += "CheckBox error" + ee.Message; }
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                switch (checkBox4.CheckState)
+                {
+                    case CheckState.Checked:
+                        ref_writeBit(ref reg30[2], 3, '1');
+                        break;
+                    case CheckState.Unchecked:
+                        ref_writeBit(ref reg30[2], 3, '0');
+                        break;
+                    case CheckState.Indeterminate:
+                        tb1.Text += "進入CheckBox的三種狀態";
+                        break;
+                }
+            }
+            catch (Exception ee) { tb1.Text += "CheckBox error" + ee.Message; }
+        }
+
+        private void checkBox8_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                switch (checkBox8.CheckState)
+                {
+                    case CheckState.Checked:
+                        ref_writeBit(ref reg30[2], 4, '1');
+                        break;
+                    case CheckState.Unchecked:
+                        ref_writeBit(ref reg30[2], 4, '0');
+                        break;
+                    case CheckState.Indeterminate:
+                        tb1.Text += "進入CheckBox的三種狀態";
+                        break;
+                }
+            }
+            catch (Exception ee) { tb1.Text += "CheckBox error" + ee.Message; }
+        }
+        private void checkBox7_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                switch (checkBox7.CheckState)
+                {
+                    case CheckState.Checked:
+                        ref_writeBit(ref reg30[2], 5, '1');
+                        break;
+                    case CheckState.Unchecked:
+                        ref_writeBit(ref reg30[2], 5, '0');
+                        break;
+                    case CheckState.Indeterminate:
+                        tb1.Text += "進入CheckBox的三種狀態";
+                        break;
+                }
+            }
+            catch (Exception ee) { tb1.Text += "CheckBox error" + ee.Message; }
+        }
+
+        private void checkBox6_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                switch (checkBox6.CheckState)
+                {
+                    case CheckState.Checked:
+                        ref_writeBit(ref reg30[2], 6, '1');
+                        break;
+                    case CheckState.Unchecked:
+                        ref_writeBit(ref reg30[2], 6, '0');
+                        break;
+                    case CheckState.Indeterminate:
+                        tb1.Text += "進入CheckBox的三種狀態";
+                        break;
+                }
+            }
+            catch (Exception ee) { tb1.Text += "CheckBox error" + ee.Message; }
+        }
+
+        private void checkBox5_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                switch (checkBox5.CheckState)
+                {
+                    case CheckState.Checked:
+                        ref_writeBit(ref reg30[2], 7, '1');
+                        break;
+                    case CheckState.Unchecked:
+                        ref_writeBit(ref reg30[2], 7, '0');
+                        break;
+                    case CheckState.Indeterminate:
+                        tb1.Text += "進入CheckBox的三種狀態";
+                        break;
+                }
+            }
+            catch (Exception ee) { tb1.Text += "CheckBox error" + ee.Message; }
+        }
+        #endregion
+
+
     }
 }
