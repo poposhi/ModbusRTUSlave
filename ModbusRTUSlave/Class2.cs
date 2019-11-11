@@ -17,8 +17,8 @@ namespace ModbusRTUSlave
         public ushort[] REG { get { return reg; } set { reg = value; } }
         public double getV { get { return v; } set { v = value; } }
         public double getF { get { return f; } set { f = value; } }
-        public double getP { get { return p; } set { p = value; } }
-        public double getQ { get { return q; } set { q = value; } }
+        public double getP { get { return complement((ushort)p); } set { p = value; } }
+        public double getQ { get { return complement((ushort)q); } set { q = value; } }
         private static double complement(ushort num) //2' 補數轉換
         {
             double result = 0;

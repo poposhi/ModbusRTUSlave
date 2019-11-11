@@ -284,7 +284,7 @@ namespace ModbusRTUSlave
             {
                 comPort.StopBits = StopBits.None;
             }
-            else if (cmbStopBit.Text == "1")
+            //else if (cmbStopBit.Text == "1")
             {
                 comPort.StopBits = StopBits.One;
             }
@@ -311,8 +311,8 @@ namespace ModbusRTUSlave
         private void reg_init()
         {
             reg30[2] = 0; //初始化故障代碼
-            reg30[6] = reg30[7] = reg30[8] = 380; //初始化電壓 
-            reg30[16] = 60;
+            reg30[6] = reg30[7] = reg30[8] = 3800; //初始化電壓 
+            reg30[16] = 6000;
             reg30[24] = 0;
             reg30[25] = 0;
 
@@ -343,13 +343,13 @@ namespace ModbusRTUSlave
             for (int i = 0; i < 60; i++)
             {
                 slave.DataStore.InputRegisters[5000 + i] = reg30[i];
-                int addr = 3500 + i;
+                int addr = 35000 + i;
                 lv_Print(listView1, addr.ToString(), reg30[i].ToString());
             }
             pcs1.REG = reg30;
             pcs1.putData();
-            lb_v.Text =pcs1.getV.ToString();
-            lb_f.Text= pcs1.getF.ToString();
+            lb_v.Text =(pcs1.getV/10).ToString("#0.0");
+            lb_f.Text= (pcs1.getF/100).ToString("#0.00");
             lb_p.Text = pcs1.getP.ToString();
             lb_q.Text = pcs1.getQ.ToString();
         }
@@ -360,7 +360,11 @@ namespace ModbusRTUSlave
             {
                 for (int i = 6; i < 9; i++)
                 {
-                    reg30[i] += Convert.ToUInt16(textBox_fine.Text);
+                    for (int ii = 0; ii <10; ii++)
+                    {
+                        reg30[i] += Convert.ToUInt16(textBox_fine.Text);
+                    }
+                    
                 }
 
             }
@@ -391,7 +395,10 @@ namespace ModbusRTUSlave
             {
                 for (int i = 6; i < 9; i++)
                 {
-                    reg30[i] -= Convert.ToUInt16(textBox_fine.Text);
+                    for (int ii = 0; ii < 10; ii++)
+                    {
+                        reg30[i] -= Convert.ToUInt16(textBox_fine.Text);
+                    }
                 }
 
             }
