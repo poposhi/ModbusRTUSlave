@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2024
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29503.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModbusRTUSlave", "ModbusRTUSlave\ModbusRTUSlave.csproj", "{679384A0-4083-4D83-BC14-52DB2C850E78}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModbusRTUSlave_edit", "ModbusRTUSlave\ModbusRTUSlave_edit.csproj", "{679384A0-4083-4D83-BC14-52DB2C850E78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

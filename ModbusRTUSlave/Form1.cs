@@ -81,6 +81,7 @@ namespace ModbusRTUSlave
         private byte slaveID = 1;
         private SerialPort comPort = new SerialPort();
         ushort[] reg30 = new ushort[60];
+        
         private void Form1_Load(object sender, EventArgs e)
         {
             cmbBaud.SelectedIndex = 7;
@@ -121,7 +122,24 @@ namespace ModbusRTUSlave
                         //You can set AO value to hardware here
 
                         DoAOUpdate(iAddress, e.Data.B[i].ToString());
-                        iAddress++;
+                        iAddress++;//地址會減1 41207>41041
+                        try
+                        {
+                            if (iAddress == 6003)
+                            {
+                                reg30[25] = e.Data.B[i]; //iAddress 1000是41001
+                            }
+                            if (iAddress == 6006) //實際上是6006
+                            {
+                                reg30[24] = e.Data.B[i]; //iAddress 1000是41001
+                            }
+                        }
+                        catch 
+                        {
+                            tb1.Text = "寫入pq轉換暫存器錯誤 ";
+                        }
+
+
                     }
                     break;
 
@@ -246,6 +264,7 @@ namespace ModbusRTUSlave
 
         private void btOpenCOM_Click_1(object sender, EventArgs e)
         {
+            #region comPort
             comPort.PortName = cmbPort.Text;
             comPort.BaudRate = int.Parse(cmbBaud.Text);
             comPort.DataBits = int.Parse(cmbDataBit.Text);
@@ -270,6 +289,7 @@ namespace ModbusRTUSlave
                 comPort.StopBits = StopBits.One;
             }
             comPort.Open();
+            #endregion
             slave = ModbusSerialSlave.CreateRtu(slaveID, comPort);
             slave.ModbusSlaveRequestReceived += new EventHandler<ModbusSlaveRequestEventArgs>(Modbus_Request_Event);
             slave.DataStore = Modbus.Data.DataStoreFactory.CreateDefaultDataStore();
@@ -277,14 +297,24 @@ namespace ModbusRTUSlave
             btOpenCOM.Enabled = false;
             btCloseCOM.Enabled = true;
             slave.Listen();
+            
             timer1.Enabled = true;
             timer2.Enabled = true;
+            
             for (int i = 0; i < 60; i++)
             {
                 reg30[i] = (ushort)i;
             }
-        }
+            reg_init();
 
+        }
+        private void reg_init()
+        {
+            reg30[6] = reg30[7] = reg30[8] = 380;
+            reg30[16] = 60;
+            reg30[24] = 0;
+            reg30[25] = 0;
+        }
         private void btCloseCOM_Click_1(object sender, EventArgs e)
         {
             //Close comport first,then stop and dispose slave.
@@ -304,7 +334,7 @@ namespace ModbusRTUSlave
         {
 
         }
-
+        pcs pcs1 = new pcs();
         private void timer2_Tick(object sender, EventArgs e)
         {
             listView1.Items.Clear();
@@ -314,6 +344,94 @@ namespace ModbusRTUSlave
                 int addr = 3500 + i;
                 lv_Print(listView1, addr.ToString(), reg30[i].ToString());
             }
+            pcs1.REG = reg30;
+            pcs1.putData();
+            lb_v.Text =pcs1.getV.ToString();
+            lb_f.Text= pcs1.getF.ToString();
+            lb_p.Text = pcs1.getP.ToString();
+            lb_q.Text = pcs1.getQ.ToString();
+        }
+
+        private void bt_fine_v_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                for (int i = 6; i < 9; i++)
+                {
+                    reg30[i] += Convert.ToUInt16(textBox_fine.Text);
+                }
+
+            }
+            catch
+            {
+                tb1.Text += "bt_fine_v+ error";
+            }
+        }
+
+        private void bt_fine_f_Click(object sender, EventArgs e)
+        {
+            try
+            {
+               
+                    reg30[16] += Convert.ToUInt16(textBox_fine.Text);
+                
+
+            }
+            catch
+            {
+                tb1.Text += "bt_fine_f+ error";
+            }
+        }
+
+        private void bt_reduce_v_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                for (int i = 6; i < 9; i++)
+                {
+                    reg30[i] -= Convert.ToUInt16(textBox_fine.Text);
+                }
+
+            }
+            catch
+            {
+                tb1.Text += "bt_fine_v- error";
+            }
+        }
+
+        private void bt_reduce_f_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                reg30[16] -= Convert.ToUInt16(textBox_fine.Text);
+
+
+            }
+            catch
+            {
+                tb1.Text += "bt_fine_f- error";
+            }
+        }
+
+        private void txtAO4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtAO3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtAO2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtAO1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
