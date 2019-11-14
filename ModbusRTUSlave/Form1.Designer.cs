@@ -90,6 +90,7 @@ namespace ModbusRTUSlave
             this.chkDO1 = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.lbisland = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.pnlCOMStatus.SuspendLayout();
@@ -112,6 +113,7 @@ namespace ModbusRTUSlave
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.lbisland);
             this.tabPage1.Controls.Add(this.checkBox5);
             this.tabPage1.Controls.Add(this.checkBox6);
             this.tabPage1.Controls.Add(this.checkBox7);
@@ -769,6 +771,17 @@ namespace ModbusRTUSlave
             this.timer2.Interval = 1000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
+            // lbisland
+            // 
+            this.lbisland.Font = new System.Drawing.Font("新細明體", 14F);
+            this.lbisland.Location = new System.Drawing.Point(273, 224);
+            this.lbisland.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbisland.Name = "lbisland";
+            this.lbisland.Size = new System.Drawing.Size(109, 23);
+            this.lbisland.TabIndex = 97;
+            this.lbisland.Text = "孤島模式 ";
+            this.lbisland.Click += new System.EventHandler(this.lbisland_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -850,6 +863,7 @@ namespace ModbusRTUSlave
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Label lbisland;
     }
 }
 

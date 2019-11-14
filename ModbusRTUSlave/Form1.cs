@@ -125,13 +125,27 @@ namespace ModbusRTUSlave
                         iAddress++;//地址會減1 41207>41041
                         try
                         {
-                            if (iAddress == 6003)
+                            if (iAddress == 6003)  //q
                             {
                                 reg30[25] = e.Data.B[i]; //iAddress 1000是41001
                             }
-                            if (iAddress == 6006) //實際上是6006
+                            if (iAddress == 6006) //p
                             {
                                 reg30[24] = e.Data.B[i]; //iAddress 1000是41001
+                            }
+                            if (iAddress == 6007) //孤島   slave 地址是正常的 
+                            {
+                                if (e.Data.B[i] == 1)
+                                {
+                                    lbisland.BackColor = Color.Red;
+                                    lbisland.Text = "孤島啟動";
+                                }
+                                if (e.Data.B[i] == 0)
+                                {
+                                    lbisland.BackColor = Color.White;
+                                    lbisland.Text = "孤島關閉";
+                                }
+
                             }
                         }
                         catch 
@@ -613,8 +627,12 @@ namespace ModbusRTUSlave
             }
             catch (Exception ee) { tb1.Text += "CheckBox error" + ee.Message; }
         }
+
         #endregion
 
+        private void lbisland_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }
