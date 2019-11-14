@@ -327,6 +327,8 @@ namespace ModbusRTUSlave
             reg30[2] = 0; //初始化故障代碼
             reg30[6] = reg30[7] = reg30[8] = 3800; //初始化電壓 
             reg30[16] = 6000;
+            reg30[20] =2500; //vdc
+            //reg30[21] =;//idc
             reg30[24] = 0;
             reg30[25] = 0;
 
