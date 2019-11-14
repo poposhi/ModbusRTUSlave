@@ -75,8 +75,35 @@ namespace ModbusRTUSlave
                 }
             }
         }
-#endregion
-
+        #endregion
+        public delegate void lPrintHandler(Label label, string text);
+        public static void l_Print(Label tb, string text)
+        {
+            //判斷這個TextBox的物件是否在同一個執行緒上
+            if (tb.InvokeRequired)
+            {
+                lPrintHandler ph = new lPrintHandler(l_Print);
+                tb.Invoke(ph, tb, text);
+            }
+            else
+            {
+                tb.Text = text;
+            }
+        }
+        public delegate void txbox_PrintPrintHandler(TextBox textBox, string text);
+        public static void txbox_Print(TextBox textBox, string text)
+        {
+            //判斷這個TextBox的物件是否在同一個執行緒上
+            if (textBox.InvokeRequired)
+            {
+                txbox_PrintPrintHandler ph = new txbox_PrintPrintHandler(txbox_Print);
+                textBox.Invoke(ph, textBox, text);
+            }
+            else
+            {
+                textBox.Text = text;
+            }
+        }
         ModbusSlave slave;
         private byte slaveID = 1;
         private SerialPort comPort = new SerialPort();
@@ -150,7 +177,7 @@ namespace ModbusRTUSlave
                         }
                         catch 
                         {
-                            tb1.Text = "寫入pq轉換暫存器錯誤 ";
+                            txbox_Print(tb1, "寫入pq轉換暫存器錯誤 ");
                         }
 
 
@@ -386,7 +413,8 @@ namespace ModbusRTUSlave
             }
             catch
             {
-                tb1.Text += "bt_fine_v+ error";
+                txbox_Print(tb1, "bt_fine_v+ error ");
+                
             }
         }
 
