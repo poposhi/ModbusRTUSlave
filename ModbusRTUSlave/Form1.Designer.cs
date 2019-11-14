@@ -548,7 +548,7 @@ namespace ModbusRTUSlave
             this.cmbPort.Name = "cmbPort";
             this.cmbPort.Size = new System.Drawing.Size(99, 24);
             this.cmbPort.TabIndex = 28;
-            this.cmbPort.Text = "COM4";
+            this.cmbPort.Text = "COM6";
             // 
             // txtAI4
             // 
