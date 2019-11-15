@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,7 +10,7 @@ using Modbus;
 using Modbus.Device;
 using Modbus.Data;
 using System.Threading;
- 
+
 namespace ModbusRTUSlave
 {
     public partial class Form1 : Form
@@ -20,23 +20,33 @@ namespace ModbusRTUSlave
             InitializeComponent();
             InitialListView();
         }
+        #region å§”æ´¾
         #region listview
-        private void InitialListView()//ªì©l¤ÆListViewªº®æ¦¡¤j¤p 
+        private void InitialListView()//åˆå§‹åŒ–ListViewçš„æ ¼å¼å¤§å° 
         {
             listView1.View = View.Details;
             listView1.GridLines = true;
             listView1.LabelEdit = false;
             listView1.FullRowSelect = true;
-            listView1.Columns.Add("address",50);
+            listView1.Columns.Add("address", 50);
             listView1.Columns.Add("value", 50);
-            //Âù½w½Ä
+            lv.View = View.Details;
+            lv.GridLines = true;
+            lv.LabelEdit = false;
+            lv.FullRowSelect = true;
+            lv.Columns.Add("meeeage1", 100);
+            lv.Columns.Add("meeeage2", 200);
+            //é›™ç·©è¡
             listView1.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance
    | System.Reflection.BindingFlags.NonPublic).SetValue(listView1, true, null);
+            lv.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance
+| System.Reflection.BindingFlags.NonPublic).SetValue(lv, true, null);
         }
-        public delegate void Listview_Print(ListView list, string time, string message);//time type ¨S§ï
-        public static void lv_Print(ListView list, string time, string message)// ¿é¤Jlistview ,¨â­Óstr
+        public delegate void Listview_Print(ListView list, string time, string message);//time type æ²’æ”¹
+        public delegate void lPrintHandler(Label label, string text);
+        public static void lv_Print(ListView list, string time, string message)// è¼¸å…¥listview ,å…©å€‹str
         {
-            //§PÂ_³o­ÓTextBoxªºª«¥ó¬O§_¦b¦P¤@­Ó°õ¦æºü¤W
+            //åˆ¤æ–·é€™å€‹TextBoxçš„ç‰©ä»¶æ˜¯å¦åœ¨åŒä¸€å€‹åŸ·è¡Œç·’ä¸Š
             if (list.InvokeRequired)
             {
                 Listview_Print ph = new Listview_Print(lv_Print);
@@ -54,10 +64,10 @@ namespace ModbusRTUSlave
                 }
             }
         }
-        public static void lv_Print(ListView list, string message)// ¿é¤Jlistview ,¨â­Óstr
+        public static void lv_Print(ListView list, string message)// è¼¸å…¥listview ,å…©å€‹str
         {
             String time = DateTime.Now.ToString();
-            //§PÂ_³o­ÓTextBoxªºª«¥ó¬O§_¦b¦P¤@­Ó°õ¦æºü¤W
+            //åˆ¤æ–·é€™å€‹TextBoxçš„ç‰©ä»¶æ˜¯å¦åœ¨åŒä¸€å€‹åŸ·è¡Œç·’ä¸Š
             if (list.InvokeRequired)
             {
                 Listview_Print ph = new Listview_Print(lv_Print);
@@ -76,10 +86,10 @@ namespace ModbusRTUSlave
             }
         }
         #endregion
-        public delegate void lPrintHandler(Label label, string text);
+        
         public static void l_Print(Label tb, string text)
         {
-            //§PÂ_³o­ÓTextBoxªºª«¥ó¬O§_¦b¦P¤@­Ó°õ¦æºü¤W
+            //åˆ¤æ–·é€™å€‹TextBoxçš„ç‰©ä»¶æ˜¯å¦åœ¨åŒä¸€å€‹åŸ·è¡Œç·’ä¸Š
             if (tb.InvokeRequired)
             {
                 lPrintHandler ph = new lPrintHandler(l_Print);
@@ -93,7 +103,7 @@ namespace ModbusRTUSlave
         public delegate void txbox_PrintPrintHandler(TextBox textBox, string text);
         public static void txbox_Print(TextBox textBox, string text)
         {
-            //§PÂ_³o­ÓTextBoxªºª«¥ó¬O§_¦b¦P¤@­Ó°õ¦æºü¤W
+            //åˆ¤æ–·é€™å€‹TextBoxçš„ç‰©ä»¶æ˜¯å¦åœ¨åŒä¸€å€‹åŸ·è¡Œç·’ä¸Š
             if (textBox.InvokeRequired)
             {
                 txbox_PrintPrintHandler ph = new txbox_PrintPrintHandler(txbox_Print);
@@ -104,11 +114,12 @@ namespace ModbusRTUSlave
                 textBox.Text = text;
             }
         }
+#endregion
         ModbusSlave slave;
         private byte slaveID = 1;
         private SerialPort comPort = new SerialPort();
         ushort[] reg30 = new ushort[60];
-        
+
         private void Form1_Load(object sender, EventArgs e)
         {
             cmbBaud.SelectedIndex = 7;
@@ -149,35 +160,45 @@ namespace ModbusRTUSlave
                         //You can set AO value to hardware here
 
                         DoAOUpdate(iAddress, e.Data.B[i].ToString());
-                        iAddress++;//¦a§}·|´î1 41207>41041
+                        iAddress++;//åœ°å€æœƒæ¸›1 41207>41041
+                        lv_Print(lv, iAddress.ToString(), e.Data.B[i].ToString());
                         try
                         {
+                            //é€™é‚Šçš„åœ°å€è¦æ¸›1
                             if (iAddress == 6003)  //q
                             {
-                                reg30[25] = e.Data.B[i]; //iAddress 1000¬O41001
+                                reg30[25] = e.Data.B[i]; //iAddress 1000æ˜¯41001
+                                pcs1.getQ = reg30[25];
+                                //lv_Print(lv, e.Data.B[i].ToString());
                             }
                             if (iAddress == 6006) //p
                             {
-                                reg30[24] = e.Data.B[i]; //iAddress 1000¬O41001
+                                reg30[24] = e.Data.B[i]; //iAddress 1000æ˜¯41001
+                                //lv_Print(lv, e.Data.B[i].ToString());
+                                pcs1.getP = reg30[24];
                             }
-                            if (iAddress == 6007) //©t®q   slave ¦a§}¬O¥¿±`ªº 
+                            if (iAddress == 6007) //å­¤å³¶   slave åœ°å€æ˜¯æ­£å¸¸çš„ 
                             {
                                 if (e.Data.B[i] == 1)
                                 {
                                     lbisland.BackColor = Color.Red;
-                                    lbisland.Text = "©t®q±Ò°Ê";
+                                    lbisland.Text = "å­¤å³¶å•Ÿå‹•";
                                 }
                                 if (e.Data.B[i] == 0)
                                 {
                                     lbisland.BackColor = Color.White;
-                                    lbisland.Text = "©t®qÃö³¬";
+                                    lbisland.Text = "å­¤å³¶é—œé–‰";
                                 }
-
+                            }
+                            if (iAddress == 6007) 
+                            {
+                                l_Print(lb_test_write, "å¯«å…¥æˆåŠŸ ");
                             }
                         }
-                        catch 
+                        catch(Exception ee)
                         {
-                            txbox_Print(tb1, "¼g¤JpqÂà´«¼È¦s¾¹¿ù»~ ");
+                            lv_Print(lv, "å¯«å…¥pqè½‰æ›æš«å­˜å™¨éŒ¯èª¤ ",ee.Message);
+                            
                         }
 
 
@@ -197,7 +218,7 @@ namespace ModbusRTUSlave
                         if (e.Data.A.Count == 1)
                         {
                             break;
-                        }       
+                        }
                     }
                     break;
             }
@@ -296,6 +317,7 @@ namespace ModbusRTUSlave
             slave.DataStore.CoilDiscretes[2] = chkDO2.Checked;
             slave.DataStore.CoilDiscretes[3] = chkDO3.Checked;
             slave.DataStore.CoilDiscretes[4] = chkDO4.Checked;
+            
         }
 
         private void cmbPort_SelectedIndexChanged(object sender, EventArgs e)
@@ -338,10 +360,10 @@ namespace ModbusRTUSlave
             btOpenCOM.Enabled = false;
             btCloseCOM.Enabled = true;
             slave.Listen();
-            
+
             timer1.Enabled = true;
             timer2.Enabled = true;
-            
+
             for (int i = 0; i < 60; i++)
             {
                 reg30[i] = (ushort)i;
@@ -351,10 +373,10 @@ namespace ModbusRTUSlave
         }
         private void reg_init()
         {
-            reg30[2] = 0; //ªì©l¤Æ¬G»Ù¥N½X
-            reg30[6] = reg30[7] = reg30[8] = 3800; //ªì©l¤Æ¹qÀ£ 
+            reg30[2] = 0; //åˆå§‹åŒ–æ•…éšœä»£ç¢¼
+            reg30[6] = reg30[7] = reg30[8] = 3800; //åˆå§‹åŒ–é›»å£“ 
             reg30[16] = 6000;
-            reg30[20] =2500; //vdc
+            reg30[20] = 2500; //vdc
             //reg30[21] =;//idc
             reg30[24] = 0;
             reg30[25] = 0;
@@ -391,8 +413,8 @@ namespace ModbusRTUSlave
             }
             pcs1.REG = reg30;
             pcs1.putData();
-            lb_v.Text =(pcs1.getV/10).ToString("#0.0");
-            lb_f.Text= (pcs1.getF/100).ToString("#0.00");
+            lb_v.Text = (pcs1.getV / 10).ToString("#0.0");
+            lb_f.Text = (pcs1.getF / 100).ToString("#0.00");
             lb_p.Text = pcs1.getP.ToString();
             lb_q.Text = pcs1.getQ.ToString();
         }
@@ -403,18 +425,18 @@ namespace ModbusRTUSlave
             {
                 for (int i = 6; i < 9; i++)
                 {
-                    for (int ii = 0; ii <10; ii++)
+                    for (int ii = 0; ii < 10; ii++)
                     {
                         reg30[i] += Convert.ToUInt16(textBox_fine.Text);
                     }
-                    
+
                 }
 
             }
             catch
             {
-                txbox_Print(tb1, "bt_fine_v+ error ");
                 
+                lv_Print(lv, "bt_fine_v+ error ");
             }
         }
 
@@ -422,14 +444,14 @@ namespace ModbusRTUSlave
         {
             try
             {
-               
-                    reg30[16] += Convert.ToUInt16(textBox_fine.Text);
-                
+
+                reg30[16] += Convert.ToUInt16(textBox_fine.Text);
+
 
             }
             catch
             {
-                tb1.Text += "bt_fine_f+ error";
+                lv_Print(lv, "bt_fine_f+ error");
             }
         }
 
@@ -448,7 +470,7 @@ namespace ModbusRTUSlave
             }
             catch
             {
-                tb1.Text += "bt_fine_v- error";
+                lv_Print(lv, "bt_fine_v- error");
             }
         }
 
@@ -463,22 +485,23 @@ namespace ModbusRTUSlave
             }
             catch
             {
-                tb1.Text += "bt_fine_f- error";
+                lv_Print(lv, "bt_fine_f- error");
             }
         }
-        private void ref_writeBit(ref ushort value, int bit_number, char bit_value) //¿é¤J¼Æ­È ­n§ó§ïªº²Ä´X­Óbit  ­n§ó§ïªº¼Æ­È ¦^¶Ç¾ã­Ó¼È¦s¾¹ §ó§ï¦nªº¼Æ­È  
+        private void ref_writeBit(ref ushort value, int bit_number, char bit_value) //è¼¸å…¥æ•¸å€¼ è¦æ›´æ”¹çš„ç¬¬å¹¾å€‹bit  è¦æ›´æ”¹çš„æ•¸å€¼ å›å‚³æ•´å€‹æš«å­˜å™¨ æ›´æ”¹å¥½çš„æ•¸å€¼  
         {
-            try 
+            try
             {
                 string flag;
                 int Substring_bit = 15 - bit_number;
                 flag = Convert.ToString(value, 2).PadLeft(16, '0');
-                var c = flag.ToCharArray();//¤À¶}¦¨ char array
-                c[Substring_bit] = bit_value; //­×§ï
-                string str = new string(c); //¦X¨Ö char array to string 
+                var c = flag.ToCharArray();//åˆ†é–‹æˆ char array
+                c[Substring_bit] = bit_value; //ä¿®æ”¹
+                string str = new string(c); //åˆä½µ char array to string 
                 value = Convert.ToUInt16(str, 2);
             }
-            catch { tb1.Text += "ref_writeBit error"; }
+            catch {
+                lv_Print(lv, "ref_writeBit error");}
         }
 
         private void txtAO4_TextChanged(object sender, EventArgs e)
@@ -514,11 +537,12 @@ namespace ModbusRTUSlave
                         ref_writeBit(ref reg30[2], 0, '0');
                         break;
                     case CheckState.Indeterminate:
-                        tb1.Text += "¶i¤JCheckBoxªº¤TºØª¬ºA";
+                        lv_Print(lv, "é€²å…¥CheckBoxçš„ä¸‰ç¨®ç‹€æ…‹");
+                        
                         break;
                 }
             }
-            catch(Exception ee) { tb1.Text += "CheckBox error"+ee.Message; }
+            catch (Exception ee) { lv_Print(lv, "CheckBox error",ee.Message);  }
         }
         private void checkBox2_CheckedChanged_1(object sender, EventArgs e)
         {
@@ -533,11 +557,11 @@ namespace ModbusRTUSlave
                         ref_writeBit(ref reg30[2], 1, '0');
                         break;
                     case CheckState.Indeterminate:
-                        tb1.Text += "¶i¤JCheckBoxªº¤TºØª¬ºA";
+                        lv_Print(lv, "é€²å…¥CheckBoxçš„ä¸‰ç¨®ç‹€æ…‹");
                         break;
                 }
             }
-            catch (Exception ee) { tb1.Text += "CheckBox error" + ee.Message; }
+            catch (Exception ee) { lv_Print(lv, "CheckBox error", ee.Message); }
         }
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
@@ -552,11 +576,11 @@ namespace ModbusRTUSlave
                         ref_writeBit(ref reg30[2], 2, '0');
                         break;
                     case CheckState.Indeterminate:
-                        tb1.Text += "¶i¤JCheckBoxªº¤TºØª¬ºA";
+                        lv_Print(lv, "é€²å…¥CheckBoxçš„ä¸‰ç¨®ç‹€æ…‹");
                         break;
                 }
             }
-            catch (Exception ee) { tb1.Text += "CheckBox error" + ee.Message; }
+            catch (Exception ee) { lv_Print(lv, "CheckBox error", ee.Message); }
         }
 
         private void checkBox4_CheckedChanged(object sender, EventArgs e)
@@ -572,11 +596,11 @@ namespace ModbusRTUSlave
                         ref_writeBit(ref reg30[2], 3, '0');
                         break;
                     case CheckState.Indeterminate:
-                        tb1.Text += "¶i¤JCheckBoxªº¤TºØª¬ºA";
+                        lv_Print(lv, "é€²å…¥CheckBoxçš„ä¸‰ç¨®ç‹€æ…‹");
                         break;
                 }
             }
-            catch (Exception ee) { tb1.Text += "CheckBox error" + ee.Message; }
+            catch (Exception ee) { lv_Print(lv, "CheckBox error", ee.Message); }
         }
 
         private void checkBox8_CheckedChanged(object sender, EventArgs e)
@@ -592,11 +616,11 @@ namespace ModbusRTUSlave
                         ref_writeBit(ref reg30[2], 4, '0');
                         break;
                     case CheckState.Indeterminate:
-                        tb1.Text += "¶i¤JCheckBoxªº¤TºØª¬ºA";
+                        lv_Print(lv, "é€²å…¥CheckBoxçš„ä¸‰ç¨®ç‹€æ…‹");
                         break;
                 }
             }
-            catch (Exception ee) { tb1.Text += "CheckBox error" + ee.Message; }
+            catch (Exception ee) { lv_Print(lv, "CheckBox error", ee.Message); }
         }
         private void checkBox7_CheckedChanged(object sender, EventArgs e)
         {
@@ -611,11 +635,11 @@ namespace ModbusRTUSlave
                         ref_writeBit(ref reg30[2], 5, '0');
                         break;
                     case CheckState.Indeterminate:
-                        tb1.Text += "¶i¤JCheckBoxªº¤TºØª¬ºA";
+                        lv_Print(lv, "é€²å…¥CheckBoxçš„ä¸‰ç¨®ç‹€æ…‹");
                         break;
                 }
             }
-            catch (Exception ee) { tb1.Text += "CheckBox error" + ee.Message; }
+            catch (Exception ee) { lv_Print(lv, "CheckBox error", ee.Message); }
         }
 
         private void checkBox6_CheckedChanged(object sender, EventArgs e)
@@ -631,11 +655,11 @@ namespace ModbusRTUSlave
                         ref_writeBit(ref reg30[2], 6, '0');
                         break;
                     case CheckState.Indeterminate:
-                        tb1.Text += "¶i¤JCheckBoxªº¤TºØª¬ºA";
+                        lv_Print(lv, "é€²å…¥CheckBoxçš„ä¸‰ç¨®ç‹€æ…‹");
                         break;
                 }
             }
-            catch (Exception ee) { tb1.Text += "CheckBox error" + ee.Message; }
+            catch (Exception ee) { lv_Print(lv, "CheckBox error", ee.Message); }
         }
 
         private void checkBox5_CheckedChanged(object sender, EventArgs e)
@@ -651,11 +675,11 @@ namespace ModbusRTUSlave
                         ref_writeBit(ref reg30[2], 7, '0');
                         break;
                     case CheckState.Indeterminate:
-                        tb1.Text += "¶i¤JCheckBoxªº¤TºØª¬ºA";
+                        lv_Print(lv, "é€²å…¥CheckBoxçš„ä¸‰ç¨®ç‹€æ…‹");
                         break;
                 }
             }
-            catch (Exception ee) { tb1.Text += "CheckBox error" + ee.Message; }
+            catch (Exception ee) { lv_Print(lv, "CheckBox error", ee.Message); }
         }
 
         #endregion
