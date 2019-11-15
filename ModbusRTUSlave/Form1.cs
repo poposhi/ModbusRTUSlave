@@ -10,7 +10,7 @@ using Modbus;
 using Modbus.Device;
 using Modbus.Data;
 using System.Threading;
-
+ 
 namespace ModbusRTUSlave
 {
     public partial class Form1 : Form
