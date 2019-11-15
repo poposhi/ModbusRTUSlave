@@ -1,5 +1,5 @@
 namespace ModbusRTUSlave
-{  
+{ 
     partial class Form1
     {
         /// <summary>
