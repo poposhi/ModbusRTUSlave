@@ -32,6 +32,7 @@ namespace ModbusRTUSlave
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.lbisland = new System.Windows.Forms.Label();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.checkBox6 = new System.Windows.Forms.CheckBox();
             this.checkBox7 = new System.Windows.Forms.CheckBox();
@@ -90,7 +91,6 @@ namespace ModbusRTUSlave
             this.chkDO1 = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.lbisland = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.pnlCOMStatus.SuspendLayout();
@@ -153,6 +153,17 @@ namespace ModbusRTUSlave
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // lbisland
+            // 
+            this.lbisland.Font = new System.Drawing.Font("新細明體", 14F);
+            this.lbisland.Location = new System.Drawing.Point(273, 224);
+            this.lbisland.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbisland.Name = "lbisland";
+            this.lbisland.Size = new System.Drawing.Size(109, 23);
+            this.lbisland.TabIndex = 97;
+            this.lbisland.Text = "孤島模式 ";
+            this.lbisland.Click += new System.EventHandler(this.lbisland_Click);
             // 
             // checkBox5
             // 
@@ -268,8 +279,9 @@ namespace ModbusRTUSlave
             // 
             this.tb1.Location = new System.Drawing.Point(16, 394);
             this.tb1.Margin = new System.Windows.Forms.Padding(4);
+            this.tb1.Multiline = true;
             this.tb1.Name = "tb1";
-            this.tb1.Size = new System.Drawing.Size(562, 25);
+            this.tb1.Size = new System.Drawing.Size(562, 158);
             this.tb1.TabIndex = 86;
             this.tb1.Text = "bug";
             // 
@@ -672,7 +684,7 @@ namespace ModbusRTUSlave
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(349, 6);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(268, 481);
+            this.listView1.Size = new System.Drawing.Size(268, 550);
             this.listView1.TabIndex = 88;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
@@ -770,17 +782,6 @@ namespace ModbusRTUSlave
             // 
             this.timer2.Interval = 1000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
-            // 
-            // lbisland
-            // 
-            this.lbisland.Font = new System.Drawing.Font("新細明體", 14F);
-            this.lbisland.Location = new System.Drawing.Point(273, 224);
-            this.lbisland.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbisland.Name = "lbisland";
-            this.lbisland.Size = new System.Drawing.Size(109, 23);
-            this.lbisland.TabIndex = 97;
-            this.lbisland.Text = "孤島模式 ";
-            this.lbisland.Click += new System.EventHandler(this.lbisland_Click);
             // 
             // Form1
             // 

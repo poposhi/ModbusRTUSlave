@@ -175,9 +175,9 @@ namespace ModbusRTUSlave
 
                             }
                         }
-                        catch 
+                        catch (Exception ee)
                         {
-                            txbox_Print(tb1, "寫入pq轉換暫存器錯誤 ");
+                            txbox_Print(tb1, "寫入pq轉換暫存器錯誤 "+ee.Message);
                         }
 
 
@@ -352,12 +352,15 @@ namespace ModbusRTUSlave
         private void reg_init()
         {
             reg30[2] = 0; //初始化故障代碼
+            reg30[3] = 0; //初始化故障代碼
+            reg30[4] = 0; //初始化故障代碼
+            reg30[5] = 0; //初始化故障代碼
             reg30[6] = reg30[7] = reg30[8] = 3800; //初始化電壓 
-            reg30[16] = 6000;
+            reg30[16] = 6000; //f
             reg30[20] =2500; //vdc
             //reg30[21] =;//idc
-            reg30[24] = 0;
-            reg30[25] = 0;
+            reg30[24] = 0; //p
+            reg30[25] = 0;  //q
 
         }
         private void btCloseCOM_Click_1(object sender, EventArgs e)
