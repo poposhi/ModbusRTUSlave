@@ -338,6 +338,10 @@ namespace ModbusRTUSlave
             else if (cmbParity.Text.Substring(0, 1) == "1")
             {
                 comPort.Parity = Parity.Odd;
+                comPort.Parity = Parity.Odd;
+                comPort.Parity = Parity.Odd;
+                comPort.Parity = Parity.Odd;
+                comPort.Parity = Parity.Odd;
             }
             else if (cmbParity.Text.Substring(0, 1) == "2")
             {
@@ -378,9 +382,10 @@ namespace ModbusRTUSlave
             reg30[4] = 0; //初始化故障代碼
             reg30[5] = 0; //初始化故障代碼
             reg30[6] = reg30[7] = reg30[8] = 3800; //初始化電壓 
-            reg30[16] = 6000;
+            reg30[16] = 6000; //f
             reg30[20] = 2500; //vdc
-            //reg30[21] =;//idc
+            reg30[21] =173;//idc
+            reg30[22] = (ushort)(reg30[20]* reg30[21]/100);
             reg30[24] = 0;
             reg30[25] = 0;
 
@@ -690,6 +695,12 @@ namespace ModbusRTUSlave
         private void lbisland_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            lv.Clear();
+            InitialListView();
         }
     }
 }
