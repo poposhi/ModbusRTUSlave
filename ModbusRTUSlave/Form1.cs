@@ -86,7 +86,7 @@ namespace ModbusRTUSlave
             }
         }
         #endregion
-        
+
         public static void l_Print(Label tb, string text)
         {
             //判斷這個TextBox的物件是否在同一個執行緒上
@@ -114,7 +114,7 @@ namespace ModbusRTUSlave
                 textBox.Text = text;
             }
         }
-#endregion
+        #endregion
         ModbusSlave slave;
         private byte slaveID = 1;
         private SerialPort comPort = new SerialPort();
@@ -190,15 +190,15 @@ namespace ModbusRTUSlave
                                     lbisland.Text = "孤島關閉";
                                 }
                             }
-                            if (iAddress == 6007) 
+                            if (iAddress == 6007)
                             {
                                 l_Print(lb_test_write, "寫入成功 ");
                             }
                         }
-                        catch(Exception ee)
+                        catch (Exception ee)
                         {
-                            lv_Print(lv, "寫入pq轉換暫存器錯誤 ",ee.Message);
-                            
+                            lv_Print(lv, "寫入pq轉換暫存器錯誤 ", ee.Message);
+
                         }
 
 
@@ -317,7 +317,7 @@ namespace ModbusRTUSlave
             slave.DataStore.CoilDiscretes[2] = chkDO2.Checked;
             slave.DataStore.CoilDiscretes[3] = chkDO3.Checked;
             slave.DataStore.CoilDiscretes[4] = chkDO4.Checked;
-            
+
         }
 
         private void cmbPort_SelectedIndexChanged(object sender, EventArgs e)
@@ -337,6 +337,10 @@ namespace ModbusRTUSlave
             }
             else if (cmbParity.Text.Substring(0, 1) == "1")
             {
+                comPort.Parity = Parity.Odd;
+                comPort.Parity = Parity.Odd;
+                comPort.Parity = Parity.Odd;
+                comPort.Parity = Parity.Odd;
                 comPort.Parity = Parity.Odd;
             }
             else if (cmbParity.Text.Substring(0, 1) == "2")
@@ -378,9 +382,10 @@ namespace ModbusRTUSlave
             reg30[4] = 0; //初始化故障代碼
             reg30[5] = 0; //初始化故障代碼
             reg30[6] = reg30[7] = reg30[8] = 3800; //初始化電壓 
-            reg30[16] = 6000;
+            reg30[16] = 6000; //f
             reg30[20] = 2500; //vdc
-            //reg30[21] =;//idc
+            reg30[21] = 173;//idc
+            reg30[22] = (ushort)(reg30[20] * reg30[21] / 100);
             reg30[24] = 0;
             reg30[25] = 0;
 
@@ -399,7 +404,7 @@ namespace ModbusRTUSlave
         {
 
         }
-        
+
         private void btCloseCOM_Click(object sender, EventArgs e)
         {
 
@@ -438,7 +443,7 @@ namespace ModbusRTUSlave
             }
             catch
             {
-                
+
                 lv_Print(lv, "bt_fine_v+ error ");
             }
         }
@@ -503,8 +508,10 @@ namespace ModbusRTUSlave
                 string str = new string(c); //合併 char array to string 
                 value = Convert.ToUInt16(str, 2);
             }
-            catch {
-                lv_Print(lv, "ref_writeBit error");}
+            catch
+            {
+                lv_Print(lv, "ref_writeBit error");
+            }
         }
 
         private void txtAO4_TextChanged(object sender, EventArgs e)
@@ -541,11 +548,11 @@ namespace ModbusRTUSlave
                         break;
                     case CheckState.Indeterminate:
                         lv_Print(lv, "進入CheckBox的三種狀態");
-                        
+
                         break;
                 }
             }
-            catch (Exception ee) { lv_Print(lv, "CheckBox error",ee.Message);  }
+            catch (Exception ee) { lv_Print(lv, "CheckBox error", ee.Message); }
         }
         private void checkBox2_CheckedChanged_1(object sender, EventArgs e)
         {
@@ -690,6 +697,12 @@ namespace ModbusRTUSlave
         private void lbisland_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            lv.Clear();
+            InitialListView();
         }
     }
 }
