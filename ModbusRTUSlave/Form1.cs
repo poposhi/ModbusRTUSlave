@@ -195,10 +195,16 @@ namespace ModbusRTUSlave
                                 l_Print(lb_test_write, "寫入成功 ");
                             }
                         }
+<<<<<<< HEAD
+                        catch (Exception ee)
+                        {
+                            txbox_Print(tb1, "�g�Jpq�ഫ�Ȧs�����~ "+ee.Message);
+=======
                         catch(Exception ee)
                         {
                             lv_Print(lv, "寫入pq轉換暫存器錯誤 ",ee.Message);
                             
+>>>>>>> 5ead3ab56cab495acdfb72e5e9de93aeebfe69ae
                         }
 
 
@@ -373,6 +379,15 @@ namespace ModbusRTUSlave
         }
         private void reg_init()
         {
+<<<<<<< HEAD
+            reg30[2] = 0; //��l�ƬG�٥N�X
+            reg30[3] = 0; //��l�ƬG�٥N�X
+            reg30[4] = 0; //��l�ƬG�٥N�X
+            reg30[5] = 0; //��l�ƬG�٥N�X
+            reg30[6] = reg30[7] = reg30[8] = 3800; //��l�ƹq�� 
+            reg30[16] = 6000; //f
+            reg30[20] =2500; //vdc
+=======
             reg30[2] = 0; //初始化故障代碼
             reg30[3] = 0; //初始化故障代碼
             reg30[4] = 0; //初始化故障代碼
@@ -380,9 +395,10 @@ namespace ModbusRTUSlave
             reg30[6] = reg30[7] = reg30[8] = 3800; //初始化電壓 
             reg30[16] = 6000;
             reg30[20] = 2500; //vdc
+>>>>>>> 5ead3ab56cab495acdfb72e5e9de93aeebfe69ae
             //reg30[21] =;//idc
-            reg30[24] = 0;
-            reg30[25] = 0;
+            reg30[24] = 0; //p
+            reg30[25] = 0;  //q
 
         }
         private void btCloseCOM_Click_1(object sender, EventArgs e)

@@ -90,8 +90,11 @@
             this.chkDO1 = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+<<<<<<< HEAD
+=======
             this.lb_test_write = new System.Windows.Forms.Label();
             this.lv = new System.Windows.Forms.ListView();
+>>>>>>> 5ead3ab56cab495acdfb72e5e9de93aeebfe69ae
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.pnlCOMStatus.SuspendLayout();
@@ -160,12 +163,22 @@
             // 
             // lbisland
             // 
+<<<<<<< HEAD
+            this.lbisland.Font = new System.Drawing.Font("�s�ө���", 14F);
+            this.lbisland.Location = new System.Drawing.Point(273, 224);
+            this.lbisland.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbisland.Name = "lbisland";
+            this.lbisland.Size = new System.Drawing.Size(109, 23);
+            this.lbisland.TabIndex = 97;
+            this.lbisland.Text = "�t�q�Ҧ� ";
+=======
             this.lbisland.Font = new System.Drawing.Font("PMingLiU", 14F);
             this.lbisland.Location = new System.Drawing.Point(205, 179);
             this.lbisland.Name = "lbisland";
             this.lbisland.Size = new System.Drawing.Size(93, 18);
             this.lbisland.TabIndex = 97;
             this.lbisland.Text = "孤島模式 ";
+>>>>>>> 5ead3ab56cab495acdfb72e5e9de93aeebfe69ae
             this.lbisland.Click += new System.EventHandler(this.lbisland_Click);
             // 
             // checkBox5
@@ -284,6 +297,19 @@
             this.bt_reduce_v.Text = "調整v-";
             this.bt_reduce_v.Click += new System.EventHandler(this.bt_reduce_v_Click);
             // 
+<<<<<<< HEAD
+            // tb1
+            // 
+            this.tb1.Location = new System.Drawing.Point(16, 394);
+            this.tb1.Margin = new System.Windows.Forms.Padding(4);
+            this.tb1.Multiline = true;
+            this.tb1.Name = "tb1";
+            this.tb1.Size = new System.Drawing.Size(562, 158);
+            this.tb1.TabIndex = 86;
+            this.tb1.Text = "bug";
+            // 
+=======
+>>>>>>> 5ead3ab56cab495acdfb72e5e9de93aeebfe69ae
             // bt_fine_f
             // 
             this.bt_fine_f.Font = new System.Drawing.Font("Arial", 8F);
@@ -651,7 +677,11 @@
             this.listView1.Location = new System.Drawing.Point(262, 5);
             this.listView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.listView1.Name = "listView1";
+<<<<<<< HEAD
+            this.listView1.Size = new System.Drawing.Size(268, 550);
+=======
             this.listView1.Size = new System.Drawing.Size(202, 435);
+>>>>>>> 5ead3ab56cab495acdfb72e5e9de93aeebfe69ae
             this.listView1.TabIndex = 88;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
@@ -740,6 +770,8 @@
             this.timer2.Interval = 1000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
+<<<<<<< HEAD
+=======
             // lb_test_write
             // 
             this.lb_test_write.Font = new System.Drawing.Font("PMingLiU", 14F);
@@ -758,6 +790,7 @@
             this.lv.TabIndex = 99;
             this.lv.UseCompatibleStateImageBehavior = false;
             // 
+>>>>>>> 5ead3ab56cab495acdfb72e5e9de93aeebfe69ae
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
