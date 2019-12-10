@@ -160,7 +160,6 @@ namespace ModbusRTUSlave
                         //You can set AO value to hardware here
 
                         DoAOUpdate(iAddress, e.Data.B[i].ToString());
-                        iAddress++;//地址會減1 41207>41041
                         lv_Print(lv, iAddress.ToString(), e.Data.B[i].ToString());
                         try
                         {
@@ -201,7 +200,7 @@ namespace ModbusRTUSlave
 
                         }
 
-
+                        iAddress++;//地址會減1 41207>41041
                     }
                     break;
 
@@ -415,7 +414,7 @@ namespace ModbusRTUSlave
             listView1.Items.Clear();
             for (int i = 0; i < 60; i++)
             {
-                slave.DataStore.InputRegisters[5000 + i] = reg30[i];
+                slave.DataStore.InputRegisters[5001 + i] = reg30[i];
                 int addr = 35000 + i;
                 lv_Print(listView1, addr.ToString(), reg30[i].ToString());
             }
@@ -703,6 +702,74 @@ namespace ModbusRTUSlave
         {
             lv.Clear();
             InitialListView();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox9_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                switch (checkBox9.CheckState)
+                {
+                    case CheckState.Checked:
+                        ref_writeBit(ref reg30[3], 12, '1');
+                        break;
+                    case CheckState.Unchecked:
+                        ref_writeBit(ref reg30[3], 12, '0');
+                        break;
+                    case CheckState.Indeterminate:
+                        lv_Print(lv, "進入CheckBox的三種狀態");
+
+                        break;
+                }
+            }
+            catch (Exception ee) { lv_Print(lv, "CheckBox error", ee.Message); }
+        }
+
+        private void checkBox10_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                switch (checkBox10.CheckState)
+                {
+                    case CheckState.Checked:
+                        ref_writeBit(ref reg30[4], 10, '1');
+                        break;
+                    case CheckState.Unchecked:
+                        ref_writeBit(ref reg30[4], 10, '0');
+                        break;
+                    case CheckState.Indeterminate:
+                        lv_Print(lv, "進入CheckBox的三種狀態");
+
+                        break;
+                }
+            }
+            catch (Exception ee) { lv_Print(lv, "CheckBox error", ee.Message); }
+        }
+
+        private void checkBox11_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                switch (checkBox11.CheckState)
+                {
+                    case CheckState.Checked:
+                        ref_writeBit(ref reg30[4], 14, '1');
+                        break;
+                    case CheckState.Unchecked:
+                        ref_writeBit(ref reg30[4], 14, '0');
+                        break;
+                    case CheckState.Indeterminate:
+                        lv_Print(lv, "進入CheckBox的三種狀態");
+
+                        break;
+                }
+            }
+            catch (Exception ee) { lv_Print(lv, "CheckBox error", ee.Message); }
         }
     }
 }

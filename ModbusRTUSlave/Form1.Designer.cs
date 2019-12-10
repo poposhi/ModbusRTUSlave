@@ -32,6 +32,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.lv = new System.Windows.Forms.ListView();
             this.lb_test_write = new System.Windows.Forms.Label();
             this.lbisland = new System.Windows.Forms.Label();
@@ -92,7 +93,10 @@
             this.chkDO1 = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.button1 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.checkBox9 = new System.Windows.Forms.CheckBox();
+            this.checkBox10 = new System.Windows.Forms.CheckBox();
+            this.checkBox11 = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.pnlCOMStatus.SuspendLayout();
@@ -115,6 +119,10 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.checkBox11);
+            this.tabPage1.Controls.Add(this.checkBox10);
+            this.tabPage1.Controls.Add(this.checkBox9);
+            this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.lv);
             this.tabPage1.Controls.Add(this.lb_test_write);
@@ -152,17 +160,28 @@
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Location = new System.Drawing.Point(4, 28);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(718, 673);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Arial", 8F);
+            this.button1.Location = new System.Drawing.Point(455, 429);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(102, 34);
+            this.button1.TabIndex = 100;
+            this.button1.Text = "清除螢幕";
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            // 
             // lv
             // 
             this.lv.HideSelection = false;
             this.lv.Location = new System.Drawing.Point(8, 472);
-            this.lv.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lv.Margin = new System.Windows.Forms.Padding(4);
             this.lv.Name = "lv";
             this.lv.Size = new System.Drawing.Size(679, 184);
             this.lv.TabIndex = 99;
@@ -170,8 +189,8 @@
             // 
             // lb_test_write
             // 
-            this.lb_test_write.Font = new System.Drawing.Font("PMingLiU", 14F);
-            this.lb_test_write.Location = new System.Drawing.Point(308, 358);
+            this.lb_test_write.Font = new System.Drawing.Font("新細明體", 14F);
+            this.lb_test_write.Location = new System.Drawing.Point(574, 353);
             this.lb_test_write.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_test_write.Name = "lb_test_write";
             this.lb_test_write.Size = new System.Drawing.Size(140, 27);
@@ -180,7 +199,7 @@
             // 
             // lbisland
             // 
-            this.lbisland.Font = new System.Drawing.Font("PMingLiU", 14F);
+            this.lbisland.Font = new System.Drawing.Font("新細明體", 14F);
             this.lbisland.Location = new System.Drawing.Point(308, 268);
             this.lbisland.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbisland.Name = "lbisland";
@@ -194,7 +213,7 @@
             this.checkBox5.AutoSize = true;
             this.checkBox5.Location = new System.Drawing.Point(514, 358);
             this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(43, 22);
+            this.checkBox5.Size = new System.Drawing.Size(50, 22);
             this.checkBox5.TabIndex = 96;
             this.checkBox5.Text = "b7";
             this.checkBox5.UseVisualStyleBackColor = true;
@@ -205,7 +224,7 @@
             this.checkBox6.AutoSize = true;
             this.checkBox6.Location = new System.Drawing.Point(514, 328);
             this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(43, 22);
+            this.checkBox6.Size = new System.Drawing.Size(50, 22);
             this.checkBox6.TabIndex = 95;
             this.checkBox6.Text = "b6";
             this.checkBox6.UseVisualStyleBackColor = true;
@@ -216,7 +235,7 @@
             this.checkBox7.AutoSize = true;
             this.checkBox7.Location = new System.Drawing.Point(514, 298);
             this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(43, 22);
+            this.checkBox7.Size = new System.Drawing.Size(50, 22);
             this.checkBox7.TabIndex = 94;
             this.checkBox7.Text = "b5";
             this.checkBox7.UseVisualStyleBackColor = true;
@@ -227,7 +246,7 @@
             this.checkBox8.AutoSize = true;
             this.checkBox8.Location = new System.Drawing.Point(514, 268);
             this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(43, 22);
+            this.checkBox8.Size = new System.Drawing.Size(50, 22);
             this.checkBox8.TabIndex = 93;
             this.checkBox8.Text = "b4";
             this.checkBox8.UseVisualStyleBackColor = true;
@@ -238,7 +257,7 @@
             this.checkBox4.AutoSize = true;
             this.checkBox4.Location = new System.Drawing.Point(459, 358);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(43, 22);
+            this.checkBox4.Size = new System.Drawing.Size(50, 22);
             this.checkBox4.TabIndex = 92;
             this.checkBox4.Text = "b3";
             this.checkBox4.UseVisualStyleBackColor = true;
@@ -249,7 +268,7 @@
             this.checkBox3.AutoSize = true;
             this.checkBox3.Location = new System.Drawing.Point(459, 328);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(43, 22);
+            this.checkBox3.Size = new System.Drawing.Size(50, 22);
             this.checkBox3.TabIndex = 91;
             this.checkBox3.Text = "b2";
             this.checkBox3.UseVisualStyleBackColor = true;
@@ -260,7 +279,7 @@
             this.checkBox2.AutoSize = true;
             this.checkBox2.Location = new System.Drawing.Point(459, 298);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(43, 22);
+            this.checkBox2.Size = new System.Drawing.Size(50, 22);
             this.checkBox2.TabIndex = 90;
             this.checkBox2.Text = "b1";
             this.checkBox2.UseVisualStyleBackColor = true;
@@ -271,7 +290,7 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Location = new System.Drawing.Point(459, 268);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(43, 22);
+            this.checkBox1.Size = new System.Drawing.Size(50, 22);
             this.checkBox1.TabIndex = 89;
             this.checkBox1.Text = "b0";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -281,7 +300,7 @@
             // 
             this.bt_reduce_f.Font = new System.Drawing.Font("Arial", 8F);
             this.bt_reduce_f.Location = new System.Drawing.Point(366, 429);
-            this.bt_reduce_f.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bt_reduce_f.Margin = new System.Windows.Forms.Padding(4);
             this.bt_reduce_f.Name = "bt_reduce_f";
             this.bt_reduce_f.Size = new System.Drawing.Size(81, 34);
             this.bt_reduce_f.TabIndex = 88;
@@ -292,7 +311,7 @@
             // 
             this.bt_reduce_v.Font = new System.Drawing.Font("Arial", 8F);
             this.bt_reduce_v.Location = new System.Drawing.Point(186, 429);
-            this.bt_reduce_v.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bt_reduce_v.Margin = new System.Windows.Forms.Padding(4);
             this.bt_reduce_v.Name = "bt_reduce_v";
             this.bt_reduce_v.Size = new System.Drawing.Size(81, 34);
             this.bt_reduce_v.TabIndex = 87;
@@ -303,7 +322,7 @@
             // 
             this.bt_fine_f.Font = new System.Drawing.Font("Arial", 8F);
             this.bt_fine_f.Location = new System.Drawing.Point(276, 429);
-            this.bt_fine_f.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bt_fine_f.Margin = new System.Windows.Forms.Padding(4);
             this.bt_fine_f.Name = "bt_fine_f";
             this.bt_fine_f.Size = new System.Drawing.Size(81, 34);
             this.bt_fine_f.TabIndex = 85;
@@ -314,7 +333,7 @@
             // 
             this.bt_fine_v.Font = new System.Drawing.Font("Arial", 8F);
             this.bt_fine_v.Location = new System.Drawing.Point(102, 429);
-            this.bt_fine_v.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bt_fine_v.Margin = new System.Windows.Forms.Padding(4);
             this.bt_fine_v.Name = "bt_fine_v";
             this.bt_fine_v.Size = new System.Drawing.Size(81, 34);
             this.bt_fine_v.TabIndex = 84;
@@ -324,7 +343,7 @@
             // textBox_fine
             // 
             this.textBox_fine.Location = new System.Drawing.Point(18, 429);
-            this.textBox_fine.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox_fine.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_fine.Name = "textBox_fine";
             this.textBox_fine.Size = new System.Drawing.Size(73, 29);
             this.textBox_fine.TabIndex = 83;
@@ -332,7 +351,7 @@
             // 
             // lb_q
             // 
-            this.lb_q.Font = new System.Drawing.Font("PMingLiU", 14F);
+            this.lb_q.Font = new System.Drawing.Font("新細明體", 14F);
             this.lb_q.Location = new System.Drawing.Point(106, 378);
             this.lb_q.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_q.Name = "lb_q";
@@ -342,7 +361,7 @@
             // 
             // lb_p
             // 
-            this.lb_p.Font = new System.Drawing.Font("PMingLiU", 14F);
+            this.lb_p.Font = new System.Drawing.Font("新細明體", 14F);
             this.lb_p.Location = new System.Drawing.Point(106, 320);
             this.lb_p.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_p.Name = "lb_p";
@@ -352,7 +371,7 @@
             // 
             // lb_f
             // 
-            this.lb_f.Font = new System.Drawing.Font("PMingLiU", 14F);
+            this.lb_f.Font = new System.Drawing.Font("新細明體", 14F);
             this.lb_f.Location = new System.Drawing.Point(111, 268);
             this.lb_f.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_f.Name = "lb_f";
@@ -362,7 +381,7 @@
             // 
             // lb_v
             // 
-            this.lb_v.Font = new System.Drawing.Font("PMingLiU", 14F);
+            this.lb_v.Font = new System.Drawing.Font("新細明體", 14F);
             this.lb_v.Location = new System.Drawing.Point(111, 230);
             this.lb_v.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_v.Name = "lb_v";
@@ -372,7 +391,7 @@
             // 
             // label9
             // 
-            this.label9.Font = new System.Drawing.Font("PMingLiU", 14F);
+            this.label9.Font = new System.Drawing.Font("新細明體", 14F);
             this.label9.Location = new System.Drawing.Point(26, 363);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
@@ -382,7 +401,7 @@
             // 
             // label8
             // 
-            this.label8.Font = new System.Drawing.Font("PMingLiU", 14F);
+            this.label8.Font = new System.Drawing.Font("新細明體", 14F);
             this.label8.Location = new System.Drawing.Point(26, 315);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
@@ -392,7 +411,7 @@
             // 
             // label6
             // 
-            this.label6.Font = new System.Drawing.Font("PMingLiU", 14F);
+            this.label6.Font = new System.Drawing.Font("新細明體", 14F);
             this.label6.Location = new System.Drawing.Point(26, 268);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
@@ -417,7 +436,7 @@
             this.pnlCOMStatus.Controls.Add(this.cmbBaud);
             this.pnlCOMStatus.Controls.Add(this.cmbPort);
             this.pnlCOMStatus.Location = new System.Drawing.Point(18, 74);
-            this.pnlCOMStatus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlCOMStatus.Margin = new System.Windows.Forms.Padding(4);
             this.pnlCOMStatus.Name = "pnlCOMStatus";
             this.pnlCOMStatus.Size = new System.Drawing.Size(609, 130);
             this.pnlCOMStatus.TabIndex = 56;
@@ -429,9 +448,9 @@
             "1",
             "2"});
             this.cmbStopBit.Location = new System.Drawing.Point(508, 52);
-            this.cmbStopBit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbStopBit.Margin = new System.Windows.Forms.Padding(4);
             this.cmbStopBit.Name = "cmbStopBit";
-            this.cmbStopBit.Size = new System.Drawing.Size(82, 22);
+            this.cmbStopBit.Size = new System.Drawing.Size(82, 26);
             this.cmbStopBit.TabIndex = 32;
             // 
             // btCloseCOM
@@ -439,7 +458,7 @@
             this.btCloseCOM.Enabled = false;
             this.btCloseCOM.Font = new System.Drawing.Font("Arial", 8F);
             this.btCloseCOM.Location = new System.Drawing.Point(476, 92);
-            this.btCloseCOM.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btCloseCOM.Margin = new System.Windows.Forms.Padding(4);
             this.btCloseCOM.Name = "btCloseCOM";
             this.btCloseCOM.Size = new System.Drawing.Size(117, 34);
             this.btCloseCOM.TabIndex = 45;
@@ -454,16 +473,16 @@
             "1-Odd Parity",
             "2-Even Parity"});
             this.cmbParity.Location = new System.Drawing.Point(339, 52);
-            this.cmbParity.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbParity.Margin = new System.Windows.Forms.Padding(4);
             this.cmbParity.Name = "cmbParity";
-            this.cmbParity.Size = new System.Drawing.Size(148, 22);
+            this.cmbParity.Size = new System.Drawing.Size(148, 26);
             this.cmbParity.TabIndex = 31;
             // 
             // btOpenCOM
             // 
             this.btOpenCOM.Font = new System.Drawing.Font("Arial", 8F);
             this.btOpenCOM.Location = new System.Drawing.Point(339, 92);
-            this.btOpenCOM.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btOpenCOM.Margin = new System.Windows.Forms.Padding(4);
             this.btOpenCOM.Name = "btOpenCOM";
             this.btOpenCOM.Size = new System.Drawing.Size(117, 34);
             this.btOpenCOM.TabIndex = 38;
@@ -477,9 +496,9 @@
             "7",
             "8"});
             this.cmbDataBit.Location = new System.Drawing.Point(255, 52);
-            this.cmbDataBit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbDataBit.Margin = new System.Windows.Forms.Padding(4);
             this.cmbDataBit.Name = "cmbDataBit";
-            this.cmbDataBit.Size = new System.Drawing.Size(70, 22);
+            this.cmbDataBit.Size = new System.Drawing.Size(70, 26);
             this.cmbDataBit.TabIndex = 30;
             // 
             // label7
@@ -561,25 +580,25 @@
             "57600",
             "9600"});
             this.cmbBaud.Location = new System.Drawing.Point(128, 52);
-            this.cmbBaud.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbBaud.Margin = new System.Windows.Forms.Padding(4);
             this.cmbBaud.Name = "cmbBaud";
-            this.cmbBaud.Size = new System.Drawing.Size(112, 22);
+            this.cmbBaud.Size = new System.Drawing.Size(112, 26);
             this.cmbBaud.TabIndex = 29;
             // 
             // cmbPort
             // 
             this.cmbPort.Font = new System.Drawing.Font("Arial", 8F);
             this.cmbPort.Location = new System.Drawing.Point(9, 52);
-            this.cmbPort.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbPort.Margin = new System.Windows.Forms.Padding(4);
             this.cmbPort.Name = "cmbPort";
-            this.cmbPort.Size = new System.Drawing.Size(110, 22);
+            this.cmbPort.Size = new System.Drawing.Size(110, 26);
             this.cmbPort.TabIndex = 28;
             this.cmbPort.Text = "COM6";
             // 
             // txtAI4
             // 
             this.txtAI4.Location = new System.Drawing.Point(328, 208);
-            this.txtAI4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtAI4.Margin = new System.Windows.Forms.Padding(4);
             this.txtAI4.Name = "txtAI4";
             this.txtAI4.Size = new System.Drawing.Size(145, 29);
             this.txtAI4.TabIndex = 72;
@@ -588,7 +607,7 @@
             // txtAI3
             // 
             this.txtAI3.Location = new System.Drawing.Point(357, 214);
-            this.txtAI3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtAI3.Margin = new System.Windows.Forms.Padding(4);
             this.txtAI3.Name = "txtAI3";
             this.txtAI3.Size = new System.Drawing.Size(145, 29);
             this.txtAI3.TabIndex = 71;
@@ -597,7 +616,7 @@
             // txtAI2
             // 
             this.txtAI2.Location = new System.Drawing.Point(344, 224);
-            this.txtAI2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtAI2.Margin = new System.Windows.Forms.Padding(4);
             this.txtAI2.Name = "txtAI2";
             this.txtAI2.Size = new System.Drawing.Size(145, 29);
             this.txtAI2.TabIndex = 70;
@@ -606,7 +625,7 @@
             // txtAI1
             // 
             this.txtAI1.Location = new System.Drawing.Point(340, 212);
-            this.txtAI1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtAI1.Margin = new System.Windows.Forms.Padding(4);
             this.txtAI1.Name = "txtAI1";
             this.txtAI1.Size = new System.Drawing.Size(145, 29);
             this.txtAI1.TabIndex = 69;
@@ -625,7 +644,7 @@
             // txtAO4
             // 
             this.txtAO4.Location = new System.Drawing.Point(495, 216);
-            this.txtAO4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtAO4.Margin = new System.Windows.Forms.Padding(4);
             this.txtAO4.Name = "txtAO4";
             this.txtAO4.Size = new System.Drawing.Size(145, 29);
             this.txtAO4.TabIndex = 68;
@@ -635,7 +654,7 @@
             // txtAO3
             // 
             this.txtAO3.Location = new System.Drawing.Point(506, 224);
-            this.txtAO3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtAO3.Margin = new System.Windows.Forms.Padding(4);
             this.txtAO3.Name = "txtAO3";
             this.txtAO3.Size = new System.Drawing.Size(145, 29);
             this.txtAO3.TabIndex = 67;
@@ -645,7 +664,7 @@
             // txtAO2
             // 
             this.txtAO2.Location = new System.Drawing.Point(516, 224);
-            this.txtAO2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtAO2.Margin = new System.Windows.Forms.Padding(4);
             this.txtAO2.Name = "txtAO2";
             this.txtAO2.Size = new System.Drawing.Size(145, 29);
             this.txtAO2.TabIndex = 66;
@@ -655,7 +674,7 @@
             // txtAO1
             // 
             this.txtAO1.Location = new System.Drawing.Point(494, 216);
-            this.txtAO1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtAO1.Margin = new System.Windows.Forms.Padding(4);
             this.txtAO1.Name = "txtAO1";
             this.txtAO1.Size = new System.Drawing.Size(145, 29);
             this.txtAO1.TabIndex = 65;
@@ -664,7 +683,7 @@
             // 
             // label4
             // 
-            this.label4.Font = new System.Drawing.Font("PMingLiU", 14F);
+            this.label4.Font = new System.Drawing.Font("新細明體", 14F);
             this.label4.Location = new System.Drawing.Point(27, 230);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
@@ -687,7 +706,7 @@
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Location = new System.Drawing.Point(4, 28);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(718, 673);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
@@ -705,7 +724,7 @@
             // chkDI4
             // 
             this.chkDI4.Location = new System.Drawing.Point(159, 471);
-            this.chkDI4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkDI4.Margin = new System.Windows.Forms.Padding(4);
             this.chkDI4.Name = "chkDI4";
             this.chkDI4.Size = new System.Drawing.Size(123, 24);
             this.chkDI4.TabIndex = 85;
@@ -714,7 +733,7 @@
             // chkDI3
             // 
             this.chkDI3.Location = new System.Drawing.Point(159, 410);
-            this.chkDI3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkDI3.Margin = new System.Windows.Forms.Padding(4);
             this.chkDI3.Name = "chkDI3";
             this.chkDI3.Size = new System.Drawing.Size(123, 24);
             this.chkDI3.TabIndex = 84;
@@ -723,7 +742,7 @@
             // chkDI2
             // 
             this.chkDI2.Location = new System.Drawing.Point(159, 348);
-            this.chkDI2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkDI2.Margin = new System.Windows.Forms.Padding(4);
             this.chkDI2.Name = "chkDI2";
             this.chkDI2.Size = new System.Drawing.Size(123, 24);
             this.chkDI2.TabIndex = 83;
@@ -732,7 +751,7 @@
             // chkDI1
             // 
             this.chkDI1.Location = new System.Drawing.Point(156, 286);
-            this.chkDI1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkDI1.Margin = new System.Windows.Forms.Padding(4);
             this.chkDI1.Name = "chkDI1";
             this.chkDI1.Size = new System.Drawing.Size(123, 24);
             this.chkDI1.TabIndex = 82;
@@ -750,7 +769,7 @@
             // chkDO4
             // 
             this.chkDO4.Location = new System.Drawing.Point(27, 471);
-            this.chkDO4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkDO4.Margin = new System.Windows.Forms.Padding(4);
             this.chkDO4.Name = "chkDO4";
             this.chkDO4.Size = new System.Drawing.Size(123, 24);
             this.chkDO4.TabIndex = 81;
@@ -759,7 +778,7 @@
             // chkDO3
             // 
             this.chkDO3.Location = new System.Drawing.Point(27, 410);
-            this.chkDO3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkDO3.Margin = new System.Windows.Forms.Padding(4);
             this.chkDO3.Name = "chkDO3";
             this.chkDO3.Size = new System.Drawing.Size(123, 24);
             this.chkDO3.TabIndex = 80;
@@ -768,7 +787,7 @@
             // chkDO2
             // 
             this.chkDO2.Location = new System.Drawing.Point(27, 348);
-            this.chkDO2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkDO2.Margin = new System.Windows.Forms.Padding(4);
             this.chkDO2.Name = "chkDO2";
             this.chkDO2.Size = new System.Drawing.Size(123, 24);
             this.chkDO2.TabIndex = 79;
@@ -777,7 +796,7 @@
             // chkDO1
             // 
             this.chkDO1.Location = new System.Drawing.Point(24, 286);
-            this.chkDO1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkDO1.Margin = new System.Windows.Forms.Padding(4);
             this.chkDO1.Name = "chkDO1";
             this.chkDO1.Size = new System.Drawing.Size(123, 24);
             this.chkDO1.TabIndex = 78;
@@ -797,16 +816,49 @@
             this.timer2.Interval = 1000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
-            // button1
+            // label3
             // 
-            this.button1.Font = new System.Drawing.Font("Arial", 8F);
-            this.button1.Location = new System.Drawing.Point(455, 429);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(102, 34);
-            this.button1.TabIndex = 100;
-            this.button1.Text = "清除螢幕";
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            this.label3.Font = new System.Drawing.Font("新細明體", 14F);
+            this.label3.Location = new System.Drawing.Point(450, 385);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(140, 27);
+            this.label3.TabIndex = 101;
+            this.label3.Text = "告警";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
+            // 
+            // checkBox9
+            // 
+            this.checkBox9.AutoSize = true;
+            this.checkBox9.Location = new System.Drawing.Point(540, 392);
+            this.checkBox9.Name = "checkBox9";
+            this.checkBox9.Size = new System.Drawing.Size(72, 22);
+            this.checkBox9.TabIndex = 102;
+            this.checkBox9.Text = "2-b12";
+            this.checkBox9.UseVisualStyleBackColor = true;
+            this.checkBox9.CheckedChanged += new System.EventHandler(this.checkBox9_CheckedChanged);
+            // 
+            // checkBox10
+            // 
+            this.checkBox10.AutoSize = true;
+            this.checkBox10.Location = new System.Drawing.Point(579, 420);
+            this.checkBox10.Name = "checkBox10";
+            this.checkBox10.Size = new System.Drawing.Size(72, 22);
+            this.checkBox10.TabIndex = 103;
+            this.checkBox10.Text = "3-b10";
+            this.checkBox10.UseVisualStyleBackColor = true;
+            this.checkBox10.CheckedChanged += new System.EventHandler(this.checkBox10_CheckedChanged);
+            // 
+            // checkBox11
+            // 
+            this.checkBox11.AutoSize = true;
+            this.checkBox11.Location = new System.Drawing.Point(589, 448);
+            this.checkBox11.Name = "checkBox11";
+            this.checkBox11.Size = new System.Drawing.Size(72, 22);
+            this.checkBox11.TabIndex = 104;
+            this.checkBox11.Text = "3-b14";
+            this.checkBox11.UseVisualStyleBackColor = true;
+            this.checkBox11.CheckedChanged += new System.EventHandler(this.checkBox11_CheckedChanged);
             // 
             // Form1
             // 
@@ -814,7 +866,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(771, 735);
             this.Controls.Add(this.tabControl1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Modbus_Slave_RTU_Demo";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -892,6 +944,10 @@
         private System.Windows.Forms.Label lb_test_write;
         private System.Windows.Forms.ListView lv;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.CheckBox checkBox9;
+        private System.Windows.Forms.CheckBox checkBox11;
+        private System.Windows.Forms.CheckBox checkBox10;
     }
 }
 
