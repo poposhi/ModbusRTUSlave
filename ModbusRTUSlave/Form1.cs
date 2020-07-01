@@ -380,7 +380,9 @@ namespace ModbusRTUSlave
             reg30[3] = 0; //初始化故障代碼
             reg30[4] = 0; //初始化故障代碼
             reg30[5] = 0; //初始化故障代碼
-            reg30[6] = reg30[7] = reg30[8] = 3800; //初始化電壓 
+            reg30[6] = 3800; //初始化電壓 
+            reg30[7] = 3800; //初始化電壓 
+            reg30[8] = 3800; //初始化電壓 
             reg30[16] = 6000; //f
             reg30[20] = 2500; //vdc
             reg30[21] = 173;//idc
@@ -421,6 +423,7 @@ namespace ModbusRTUSlave
             pcs1.REG = reg30;
             pcs1.putData();
             lb_v.Text = (pcs1.getV / 10).ToString("#0.0");
+            lb_f.Text = (pcs1.getF / 100).ToString("#0.00");
             lb_f.Text = (pcs1.getF / 100).ToString("#0.00");
             lb_p.Text = pcs1.getP.ToString();
             lb_q.Text = pcs1.getQ.ToString();
